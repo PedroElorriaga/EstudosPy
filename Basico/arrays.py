@@ -8,11 +8,12 @@ clear()
 
 marcasCarros = ['Mercedes', 'Porsche', 'BMW', 'Land Rover', 'Audi']
 
+# LEN()
 mostrarQtdMarcas = len(marcasCarros)
 print(f'Temos {mostrarQtdMarcas} de marcas de carros no array')
 spacePrint()
 
-
+# SORT()
 def mostrarOrdAlpha():
     marcasOrdem = marcasCarros.copy() # CRIA UMA CÓPIA DO ARRAY, NÃO ALTERANDO O ORIGINAL
     marcasOrdem.sort()
@@ -23,7 +24,7 @@ mostrarOrdAlpha()
 print('Original: ', marcasCarros)
 spacePrint()
 
-
+# APPEND()
 def incluirNovaMarca(valor):
     marcasCarros.append(valor)
     print(f'{valor} adicionado!')
@@ -34,7 +35,7 @@ incluirNovaMarca('Lamborghini')
 print('Original: ', marcasCarros) # ALTERA O VALOR NO ORIGINAL
 spacePrint()
 
-
+# INDEX()
 def mostrarIndexDaMarca(valor):
     for marca in marcasCarros:
         if marca == valor:
@@ -47,7 +48,7 @@ spacePrint()
 
 arr = [1, 2, 2, 3, 4, 4, 4, 5]
 
-
+# ITERAÇÃO
 def iterandoArray() :
     print('Iterando o array: ')
     for item in arr:
@@ -56,7 +57,7 @@ def iterandoArray() :
 iterandoArray()
 spacePrint()
 
-
+# POP()
 def deletandoMarcaEspecifica(valor):
     try:
         marcasCarros.pop(valor)
@@ -66,6 +67,7 @@ def deletandoMarcaEspecifica(valor):
 
 deletandoMarcaEspecifica(int(input('Insira um index para deletar um carro: ')))
 
+# LÓGICA DE DUPLICADAS
 def pegandoDuplicadas():
     counter = Counter(arr) # CONTA QUANTAS VEZES O ITEM FOI REPETIDO
     print('Counter: ', counter.items())
