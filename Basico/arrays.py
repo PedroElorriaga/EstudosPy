@@ -57,6 +57,15 @@ iterandoArray()
 spacePrint()
 
 
+def deletandoMarcaEspecifica(valor):
+    try:
+        marcasCarros.pop(valor)
+        return print(marcasCarros)
+    except:
+        print('Valor não existe')
+
+deletandoMarcaEspecifica(int(input('Insira um index para deletar um carro: ')))
+
 def pegandoDuplicadas():
     counter = Counter(arr) # CONTA QUANTAS VEZES O ITEM FOI REPETIDO
     print('Counter: ', counter.items())
@@ -70,3 +79,4 @@ def pegandoDuplicadas():
     print('Total duplicados: ', somaDosDuplicados)
 
 pegandoDuplicadas()
+spacePrint()
