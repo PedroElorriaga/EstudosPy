@@ -1,0 +1,22 @@
+# AUTOMAÇÕES PARA WEB
+
+
+1 - Escolhemos o sistema operacional e o navegador que iremos operar
+
+2 - Baixe o driver compativel, e coloque o .exe na pasta de drivers
+
+3 - Inicialize seu ambiente virutal e instale o selenium:
+
+** pip install selenium **
+
+4 - No arquivo main, importe o webdriver do selenium
+** from selenium import webdriver **
+
+5 - Instancie o webdriver com o navegador escolhido
+Ex: webdriver.chrome()
+
+# Lista de chrome options 
+https://peter.sh/experiments/chromium-command-line-switches/
+
+# Doc de localizar elementos HTML
+https://selenium-python.readthedocs.io/locating-elements.html

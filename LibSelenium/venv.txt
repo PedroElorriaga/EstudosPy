@@ -1,0 +1,40 @@
+A PASTA VENV É O AMBIENTE VIRTUAL DO PYTHON, ELE É PARECIDO COM
+O PACKAGE.JSON, É NELE ONDE FICA INSTALADO AS LIBS E VERSÕES QUE
+UTILIZAMOS EM NOSSOS PROJETOS
+
+
+COMO UTILIZAR:
+
+1 - Criaremos a pasta venv com o comando -> python -m venv nome
+
+2 - Depois ativaremos o ambiente virtual -> . nome\Scripts\Activate.ps1
+Obs: Caso queira desativar o ambiente virtual -> deactivate
+Obs 2: Caso queira ativar o ambiente virual no cmd -> nome\Scripts\Activate.bat
+
+
+
+DICA #1
+
+Sofremos muito no começo la em 2020 quando tentamos configurar o python 
+tanto virtual, quando no VSCODE
+
+
+Quando quiser usar interpretadores e versões diferente de python
+Podemos executar -> py -3.10 venv env     ou      py -3.9 venv env
+
+
+Para configurar no code runner a execução do ambiente venv
+Podemos dar um CTRL + SHIFT + P e eescrever "Python: Interpreter"
+e configurar i interpretador no venv
+
+
+
+POSSIVEL ERRO
+
+ModuleNotFoundError: No module named 'selenium'
+
+Esse erro acontece porque provavelmente o interpretador não está rodando
+em ambiente virtual venv ou env
+
+Verifique se o código está com todas as dependencias instaladas
+no ambiente correto
