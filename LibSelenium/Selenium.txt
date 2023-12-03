@@ -20,3 +20,27 @@ https://peter.sh/experiments/chromium-command-line-switches/
 
 # Doc de localizar elementos HTML
 https://selenium-python.readthedocs.io/locating-elements.html
+
+
+6 - Podemos usar o exemplo de inicialização que fiz no exemple.py
+
+
+
+CURIOSIDADES:
+
+from selenium.webdriver.common.by import By -> É utilizado para selecionar
+elementos HTML com o driver
+
+
+from selenium.webdriver.common.keys import Keys -> É utilizado para pressionar
+teclas como por exemplo Keys.ENTER que aperta o enter do teclado
+
+
+from selenium.webdriver.support.wait import WebDriverWait -> É utilizado
+para fazer com que o bloco de busca aguarde uma página dinamica carregar
+e é utlizado junto com o 
+from selenium.webdriver.support import expected_conditions as EC
+
+
+from selenium.webdriver.common.action_chains import ActionChains -> É usado
+para utilizar hotkeys, exemplo CTRL + C
