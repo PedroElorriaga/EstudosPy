@@ -38,3 +38,6 @@ em ambiente virtual venv ou env
 
 Verifique se o código está com todas as dependencias instaladas
 no ambiente correto
+
+Caso o pip der erro de the system cannot find the file specified
+Rode o comando a seguIr -> python -m pip install -U --force pip
