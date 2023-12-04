@@ -9,6 +9,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import TimeoutException
 
 load_dotenv()
 class Automate:
@@ -82,9 +83,14 @@ class Automate:
             element_password_x.send_keys(os.getenv('USER_PASSWORD'))
             element_password_x.send_keys(Keys.ENTER)
 
-        except:
+        except TimeoutException as e:
             self.errors.append('Não encontrado')
+            print(f'Erro: {e.stacktrace[0]}')
             
+        except TypeError as e:
+            self.errors.append('Erro de tipo')
+            print(f'Erro: {e}')
+
         finally:
             if not self.errors:
                 print('Deu tudo certo')
