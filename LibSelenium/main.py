@@ -1,4 +1,6 @@
+import os
 import time
+import dotenv
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,6 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
+dotenv.load_dotenv()
 options = webdriver.ChromeOptions() # INSTANCIANDO CHROMEDRIVER
 actions_keys = ActionChains(options)
 
@@ -30,10 +33,14 @@ if __name__ == '__main__':
     browser.get('https://www.google.com.br')
 
     try:
-        # PEQUISAR POR X
+        # PESQUISAR POR CORINTHIANS     
         element_search = WebDriverWait(browser, 4).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'gLFyf'))
         ) # UTILIZADO QUANDO TEMOS QUE ESPERAR ALGUNS ELEMENTOS JS CARREGAR
+        element_search.send_keys('Corinthians')
+        element_search.send_keys(Keys.ENTER)
+
+        # PEQUISAR POR X
         element_search = browser.find_element(By.XPATH, '//*[@id="APjFqb"]')
         element_search.click()
         element_search.send_keys(Keys.CONTROL, 'a')
@@ -52,12 +59,26 @@ if __name__ == '__main__':
         links = element_entrar.find_elements(By.TAG_NAME, 'a')
         links[0].click()
         
-
+        # INSERIR EMAIL
         element_email_x = WebDriverWait(browser, 4).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'r-1f1sjgu'))
+            EC.presence_of_element_located((By.CLASS_NAME, 'r-30o5oe'))
         )
-        link = element_email_x.find_elements(By.TAG_NAME, 'div')
+        element_email_x.send_keys(os.getenv('USER_MAIL'))
+        element_email_x.send_keys(Keys.ENTER)
 
+        # INSERIR USER
+        element_temp_x = WebDriverWait(browser, 4).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'r-30o5oe'))
+        )
+        element_temp_x.send_keys(os.getenv('USER_x'))
+        element_temp_x.send_keys(Keys.ENTER)
+
+        # INSERIR SENHA
+        element_password_x = WebDriverWait(browser, 4).until(
+            EC.presence_of_element_located((By.NAME, 'password'))
+        )
+        element_password_x.send_keys(os.getenv('USER_PASSWORD'))
+        element_password_x.send_keys(Keys.ENTER)
 
     except:
         errors.append('Não encontrado')
@@ -70,5 +91,5 @@ if __name__ == '__main__':
         else:
             print(errors)
 
-        time.sleep(5)
+        time.sleep(10)
     
