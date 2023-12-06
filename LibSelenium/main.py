@@ -37,7 +37,7 @@ class Automate:
 
         try:
             # PESQUISAR POR CORINTHIANS     
-            element_search = WebDriverWait(self.browser, 4).until(
+            element_search = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'gLFyf'))
             ) # UTILIZADO QUANDO TEMOS QUE ESPERAR ALGUNS ELEMENTOS JS CARREGAR
             element_search.send_keys('Corinthians')
@@ -56,28 +56,28 @@ class Automate:
             links[0].click()
 
             # CLICAR PARA FAZER LOGIN
-            element_entrar = WebDriverWait(self.browser, 4).until(
+            element_entrar = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'r-2o02ov'))
             )
             links = element_entrar.find_elements(By.TAG_NAME, 'a')
             links[0].click()
             
             # INSERIR EMAIL
-            element_email_x = WebDriverWait(self.browser, 4).until(
+            element_email_x = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'r-30o5oe'))
             )
             element_email_x.send_keys(os.getenv('USER_MAIL'))
             element_email_x.send_keys(Keys.ENTER)
 
             # INSERIR USER
-            element_temp_x = WebDriverWait(self.browser, 4).until(
+            element_temp_x = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'r-30o5oe'))
             )
             element_temp_x.send_keys(os.getenv('USER_X'))
             element_temp_x.send_keys(Keys.ENTER)
 
             # INSERIR SENHA
-            element_password_x = WebDriverWait(self.browser, 4).until(
+            element_password_x = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.NAME, 'password'))
             )
             element_password_x.send_keys(os.getenv('USER_PASSWORD'))
