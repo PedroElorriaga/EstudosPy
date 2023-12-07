@@ -3,6 +3,7 @@ import time
 
 from dotenv import load_dotenv
 
+from colorama import Fore
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -15,7 +16,7 @@ load_dotenv()
 class Automate:
     def __init__(self):
         self.options = webdriver.ChromeOptions()
-        self.actions_keys = ActionChains(self.options)
+        # self.actions_keys = ActionChains(self.options)
         self.errors = []
         self.options_tuple = '--start-maximized', '--disable-gpu',
         self.browser = self.make_chrome_driver(*self.options_tuple)
@@ -55,6 +56,25 @@ class Automate:
             links = element_listar_links.find_elements(By.TAG_NAME, 'a')
             links[0].click()
 
+        except TimeoutException as e:
+            self.errors.append('Não encontrado')
+            print(f'Erro: {e.stacktrace[0]}')
+            
+        except TypeError as e:
+            self.errors.append('Erro de tipo')
+            print(f'Erro: {e}')
+
+        finally:
+            if not self.errors:
+                print(Fore.GREEN + 'open_chrome passed' + Fore.RESET)
+                self.login_page_x()
+
+            else:
+                print(self.errors)
+                self.browser.quit()
+
+    def login_page_x(self):
+        try:
             # CLICAR PARA FAZER LOGIN
             element_entrar = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'r-2o02ov'))
@@ -69,37 +89,34 @@ class Automate:
             element_email_x.send_keys(os.getenv('USER_MAIL'))
             element_email_x.send_keys(Keys.ENTER)
 
-            # INSERIR USER
-            element_temp_x = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, 'r-30o5oe'))
-            )
-            element_temp_x.send_keys(os.getenv('USER_X'))
-            element_temp_x.send_keys(Keys.ENTER)
-
             # INSERIR SENHA
-            element_password_x = WebDriverWait(self.browser, 10).until(
+            element_password_x = WebDriverWait(self.browser, 4).until(
                 EC.presence_of_element_located((By.NAME, 'password'))
             )
+            print(element_password_x)
             element_password_x.send_keys(os.getenv('USER_PASSWORD'))
             element_password_x.send_keys(Keys.ENTER)
-
-        except TimeoutException as e:
-            self.errors.append('Não encontrado')
-            print(f'Erro: {e.stacktrace[0]}')
-            
-        except TypeError as e:
-            self.errors.append('Erro de tipo')
-            print(f'Erro: {e}')
-
+        
+        except TimeoutException as err:
+            self.put_user_x_and_log()
+        
         finally:
-            if not self.errors:
-                print('Deu tudo certo')
-
-            else:
-                print(self.errors)
-                self.browser.quit()
-
             time.sleep(10)
+
+    def put_user_x_and_log(self):
+        # INSERIR USER
+        element_temp_x = WebDriverWait(self.browser, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'r-30o5oe'))
+        )
+        element_temp_x.send_keys(os.getenv('USER_X'))
+        element_temp_x.send_keys(Keys.ENTER)
+
+        # INSERIR SENHA
+        element_password_x = WebDriverWait(self.browser, 10).until(
+            EC.presence_of_element_located((By.NAME, 'password'))
+        )
+        element_password_x.send_keys(os.getenv('USER_PASSWORD'))
+        element_password_x.send_keys(Keys.ENTER)
 
 
 if __name__ == '__main__':

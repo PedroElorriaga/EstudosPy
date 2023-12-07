@@ -44,3 +44,15 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.action_chains import ActionChains -> É usado
 para utilizar hotkeys, exemplo CTRL + C
+
+
+
+Alguns comandos:
+
+browser.back() -> Volta uma página na navegação
+
+browser.get('URL') -> Acessa o link selecionado
+
+browser.execute_script('window.open("URL");') -> Abre um novo link em uma nova guia
+
+browser.switch_to.window(browser.window_handles[0]) -> Troca de guia
