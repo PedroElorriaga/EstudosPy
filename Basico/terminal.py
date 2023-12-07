@@ -1,6 +1,7 @@
+import time
+
 from colorama import Fore
 from sintaxe import spacePrint, clear
-import time
 
 clear()
 

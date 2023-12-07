@@ -13,7 +13,7 @@ class Main_code:
         self.directory = directory
         self.user = user
         self.options = webdriver.ChromeOptions()
-        self.argument = '--disable-extensions', f'--user-data-dir={self.directory}', f'--profile-directory={user}',
+        self.argument = f'--user-data-dir={self.directory}', '--no-sandbox',
         self.browser = self.make_driver_chrome(*self.argument)
 
     def make_driver_chrome(self, *args):
@@ -24,7 +24,6 @@ class Main_code:
         self.options.add_experimental_option('detach', True)
 
         driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()),
             options=self.options
         )
 
