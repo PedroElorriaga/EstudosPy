@@ -13,7 +13,7 @@ class Main_code:
         self.directory = directory
         self.user = user
         self.options = webdriver.ChromeOptions()
-        self.argument = f'--user-data-dir={self.directory}', '--no-sandbox',
+        self.argument = f'--user-data-dir={self.directory}', '--no-sandbox', f'--profile-directory={self.user}',
         self.browser = self.make_driver_chrome(*self.argument)
 
     def make_driver_chrome(self, *args):
@@ -34,5 +34,5 @@ class Main_code:
         
 
 if __name__ == '__main__':
-    start = Main_code(r'C:\Users\{}\AppData\Local\Google\Chrome\User Data'.format(getpass.getuser()))
+    start = Main_code(r'C:\Users\{}\AppData\Local\Google\Chrome\User Data'.format(getpass.getuser()), 'Profile 1')
     start.get_website_url('https://www.google.com/')
