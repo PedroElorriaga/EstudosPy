@@ -1,0 +1,35 @@
+É utilizado para efetuar testes no código
+
+COMO UTILIZAR:
+
+1 - Primeiro devemos importar a lib que ja vem junto
+com o python
+
+** import unittest **
+
+
+2 - Ao criar uma classe, devemos colocar o atributo 
+do unittest
+
+** class Exemplo(unittest.TestCase): **
+
+
+3 - Sempre que o método for um teste, ele devera
+iniciar com o nome teste
+Ex: ** def test_exemplo(self): **
+
+
+4 - Temos alguns asserts dentro do unittest para validarmos
+os testes
+
+assertTrue(valor) -> Se valor for true o teste retorna ok
+
+assertEqual(valor, 1) -> Se valor é igual a 1 o teste
+retorna ok
+
+
+5 - setUP ele serve para que todo teste que ocorra dentro
+da classe ele repita o que estiver dentro dele
+
+Ex: se dentro do setUp tiver um print('Olá'), todo teste
+quer for executado dentro da classe, ele irá repetir o Olá 
