@@ -74,15 +74,18 @@ class Game():
 
             action_keys = ActionChains(self.browser)
             print(Fore.GREEN + 'Game inicializado      ' + Fore.RESET)
-
-            for i in range(5000):
-                action_keys.click(get_cookie_image)
-                action_keys.perform()
-                count = get_cookie_count.text
-                for item in itens_store:
-                    value = item.text
-                    if int(value) <= int(count.split()[0]):
-                        self.buy_new_itens_store(item)
+            
+            try:
+                for i in range(5000):
+                    action_keys.click(get_cookie_image)
+                    action_keys.perform()
+                    count = get_cookie_count.text
+                    for item in itens_store:
+                        value = item.text
+                        if int(value) <= int(count.split()[0]):
+                            self.buy_new_itens_store(item)
+            except:
+                print('Algum erro inesperado aconteceu')
         
         except:
             self.error.append('Erro take_cookies_points')
