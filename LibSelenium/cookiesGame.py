@@ -15,7 +15,7 @@ class Game():
     def __init__(self):
         self.error = []
         self.options = webdriver.ChromeOptions()
-        self.options_tuple = '--start-maximized',
+        self.options_tuple = '--no-sandbox',
         self.browser = self.make_chrome_driver(*self.options_tuple)
 
     def make_chrome_driver(self, *args):
@@ -40,15 +40,14 @@ class Game():
                 print(Fore.CYAN + i)
 
             print(Fore.GREEN + 'Inicializando o game...' + Fore.RESET, end='\r')
-            time.sleep(2.5)
 
-            self.get_website_game()
+            self.take_website_game()
 
         except:
             self.error.append('Erro start_game')
-            self.get_errors()
+            self.take_errors()
     
-    def get_website_game(self):
+    def take_website_game(self):
         try:
             accept_cookie = WebDriverWait(self.browser, 10).until(
                 EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/a[1]'))
@@ -60,22 +59,22 @@ class Game():
             )
             choose_language.click()
 
-            self.get_cookies_points()
+            self.take_cookies_points()
 
         except TimeoutException as err:
             self.error.append(err)
-            self.get_errors()
+            self.take_errors()
 
-    def get_cookies_points(self):
+    def take_cookies_points(self):
         try:
-            print(Fore.GREEN + 'Game inicializado      ' + Fore.RESET)
             self.browser.implicitly_wait(10)
-
             get_cookie_image = self.browser.find_element(By.ID, 'bigCookie')
             get_cookie_count = self.browser.find_element(By.ID, 'cookies')
             itens_store = [self.browser.find_element(By.ID, 'productPrice' + str(i)) for i in range(1,-1,-1)] # OUTPUT [productPrice1, productPrice0]
 
             action_keys = ActionChains(self.browser)
+            print(Fore.GREEN + 'Game inicializado      ' + Fore.RESET)
+
             for i in range(5000):
                 action_keys.click(get_cookie_image)
                 action_keys.perform()
@@ -86,8 +85,8 @@ class Game():
                         self.buy_new_itens_store(item)
         
         except:
-            self.error.append('Erro get_cookies_points')
-            self.get_errors()
+            self.error.append('Erro take_cookies_points')
+            self.take_errors()
 
     def buy_new_itens_store(self, item):
         try:
@@ -98,9 +97,9 @@ class Game():
 
         except:
             self.error.append('Erro buy_new_itens_store')
-            self.get_errors()
+            self.take_errors()
 
-    def get_errors(self):
+    def take_errors(self):
         print(self.error)
 
 if __name__ == '__main__':
