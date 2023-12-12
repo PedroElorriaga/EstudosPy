@@ -1,0 +1,14 @@
+POM
+
+É um padrão para tornar o código mais limpo e fácil
+de fazer manutenção
+
+É indicado fazer uma DSL antes de tudo
+(DSL) -> É o nome dado a prática de se criar pequenas
+linguagens para resolver problemas
+
+Exemplo de DSL é fazer uma abstração de uma página web 
+e marcar as funções que poderam ser feitas
+
+
+OBS: Usaremos bastante as Classes Abstratas

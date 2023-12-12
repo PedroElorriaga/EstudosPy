@@ -25,6 +25,8 @@ class ProductTestes(unittest.TestCase):
         self.product.aplcar_desconto(1, 50)
         self.assertEqual(self.product.preco, 2.50)
 
+    def tearDown(self):
+        print('Teste finalizado')
 
 if __name__ == '__main__':
     unittest.main()

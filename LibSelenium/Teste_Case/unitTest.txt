@@ -33,3 +33,9 @@ da classe ele repita o que estiver dentro dele
 
 Ex: se dentro do setUp tiver um print('Olá'), todo teste
 quer for executado dentro da classe, ele irá repetir o Olá 
+toda vez que o algum teste for executado
+
+
+6 - tearDown serve para fechar/concluir o teste, ele é um 
+finalizador do setUp
+ 
