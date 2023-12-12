@@ -1,7 +1,8 @@
-POM
+POM ( PAGE OBJECT MODEL )
 
-É um padrão para tornar o código mais limpo e fácil
-de fazer manutenção
+É um padrão para tornar o código mais limpo, fácil
+de fazer manutenção e fácil de testar
+
 
 É indicado fazer uma DSL antes de tudo
 (DSL) -> É o nome dado a prática de se criar pequenas
@@ -12,3 +13,5 @@ e marcar as funções que poderam ser feitas
 
 
 OBS: Usaremos bastante as Classes Abstratas
+
+

@@ -12,6 +12,7 @@ class Dog(Domestico):
     def tipo_obrigatorio(self):
         print('Obrigatorio chamado')
 
+
 class Tiger(Selvagem):
 
     def __init__(self, nome):
@@ -22,6 +23,7 @@ class Tiger(Selvagem):
 
     def tipo_obrigatorio(self):
         print('Obrigatorio chamado')
+        
 
 class TesteParaDarErro(Selvagem):
 
@@ -33,11 +35,13 @@ if __name__ == '__main__':
     dog = Dog('Bandit')
     dog.som()
     dog.tipo_obrigatorio()
+    dog.tipo_animal()
     print('-' * 60)
 
     tiger = Tiger('Simba')
     tiger.som()
     tiger.tipo_obrigatorio()
+    tiger.tipo_animal()
     print('-' * 60)
 
     print('Vai dar erro!!')

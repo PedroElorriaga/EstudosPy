@@ -8,7 +8,7 @@ class ProductTestes(unittest.TestCase):
 
     def setUp(self):
         self.product = Product(5, 'Amendoim', 2)
-        return print('Executando testes')
+        return
 
     def test_if_product_is_dataclass(self):
         self.assertTrue(is_dataclass(Product))
@@ -26,7 +26,7 @@ class ProductTestes(unittest.TestCase):
         self.assertEqual(self.product.preco, 2.50)
 
     def tearDown(self):
-        print('Teste finalizado')
+        return
 
 if __name__ == '__main__':
     unittest.main()

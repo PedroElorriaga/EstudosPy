@@ -4,7 +4,7 @@ class Selvagem(ABC):
     
     @abstractmethod
     def tipo_obrigatorio(self):
-        print('CUIDADO, SELVAGEM!')
+        pass
 
     def tipo_animal(self):
         print('Animal terrestre')
