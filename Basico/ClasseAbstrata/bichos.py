@@ -22,7 +22,7 @@ class Tiger(Selvagem):
         print(f'{self.nome} está rugindo')
 
     def tipo_obrigatorio(self):
-        print('Obrigatorio chamado')
+        Selvagem.tipo_obrigatorio(self)
         
 
 class TesteParaDarErro(Selvagem):

@@ -40,6 +40,9 @@ from selenium.webdriver.support.wait import WebDriverWait -> É utilizado
 para fazer com que o bloco de busca aguarde uma página dinamica carregar
 e é utlizado junto com o 
 from selenium.webdriver.support import expected_conditions as EC
+Primeiro ele executa o bloco que está abaixo dele, ex: 
+element = driver.find_element(By.NAME, self.locator)
+Caso ele não encontre, ai sim ele (WebDriverWait) é executado
 
 
 from selenium.webdriver.common.action_chains import ActionChains -> É usado
