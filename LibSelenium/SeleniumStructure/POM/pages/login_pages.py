@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-import time
 
 class BasePage(object):
     def __init__(self, driver, url=''):
@@ -30,14 +29,9 @@ class Result_login_page(BasePage):
     title_h2 = (By.TAG_NAME, 'h2')
     
     def page_confirms_login(self):
-        time.sleep(3)
         print(self.find_element(self.title_h2).text)
-        if 'Login Successful :)' in self.find_element(self.title_h2).text: # PEGA VALOR DE TEXTO h2
-            return True
-        
-        return False
-
-
+        return self.find_element(self.title_h2).text # PEGA VALOR DE TEXTO h2
+       
 if __name__ == "__main__":
 
     options = webdriver.ChromeOptions()
