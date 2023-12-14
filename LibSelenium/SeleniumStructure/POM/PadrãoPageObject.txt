@@ -15,6 +15,12 @@ e marcar as funções que poderam ser feitas
 OBS: Usaremos bastante as Classes Abstratas
 
 
-1 -
+1 - Para iniciar criaremos a seguinte estrutura
+
+PROJETC ------
+            PAGES -------
+                    login_pages.py
+            TESTS -------
+                    login_tests.py
 
 
