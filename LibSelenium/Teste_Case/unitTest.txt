@@ -22,9 +22,9 @@ Ex: ** def test_exemplo(self): **
 4 - Temos alguns asserts dentro do unittest para validarmos
 os testes
 
-assertTrue(valor) -> Se valor for true o teste retorna ok
+self.assertTrue(valor) -> Se valor for true o teste retorna ok
 
-assertEqual(valor, 1) -> Se valor é igual a 1 o teste
+self.assertEqual(valor, 1) -> Se valor é igual a 1 o teste
 retorna ok
 
 

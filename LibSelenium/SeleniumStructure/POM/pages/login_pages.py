@@ -29,7 +29,6 @@ class Result_login_page(BasePage):
     title_h2 = (By.TAG_NAME, 'h2')
     
     def page_confirms_login(self):
-        print(self.find_element(self.title_h2).text)
         return self.find_element(self.title_h2).text # PEGA VALOR DE TEXTO h2
        
 if __name__ == "__main__":

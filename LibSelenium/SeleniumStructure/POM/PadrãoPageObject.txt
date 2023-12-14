@@ -19,6 +19,7 @@ OBS: Usaremos bastante as Classes Abstratas
 
 PROJETC ------
             PAGES -------
+                    __init__.py
                     login_pages.py
             TESTS -------
                     login_tests.py
