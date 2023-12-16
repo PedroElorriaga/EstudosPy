@@ -18,16 +18,3 @@ class Todo(BasePage):
         self.find_element(self.botao_id).click()
         return True
 
-if __name__ == '__main__':
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option('detach', True)
-                                    
-    driver = webdriver.Chrome(options=options)
-
-    todo = Todo(driver, 'https://selenium.dunossauro.live/todo_list.html')
-    todo.open_url()
-    todo.fill_todo_forms(
-        'Estudar python',
-        'Estudar sobre POM e Tests',
-        urgent= True
-    )
