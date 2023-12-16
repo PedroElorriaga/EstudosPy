@@ -1,5 +1,7 @@
 # AUTOMAÇÕES PARA WEB
 
+OBS: VERSÃO v4.6.0 PRA CIMA NÃO PRECISA ESPECIFICAR O CHROMEDRIVER
+
 
 1 - Escolhemos o sistema operacional e o navegador que iremos operar
 
