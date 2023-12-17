@@ -1,8 +1,8 @@
-from base_page import BasePage
+from base_page import Page
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-class Todo(BasePage):
+class Todo(Page):
     nome_tarefa_id = (By.ID, 'todo-name')
     descricao_id = (By.ID, 'todo-desc')
     urgente_id = (By.ID, 'todo-next')

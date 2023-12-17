@@ -1,7 +1,7 @@
-from base_page import BasePage
+from base_page import Page
 from selenium.webdriver.common.by import By
 
-class Card(BasePage):
+class Card(Page):
     fieldset_todo_id = (By.ID, 'todo')
     cards_todo_id = (By.CLASS_NAME, 'terminal-card')
     name_card = (By.CSS_SELECTOR, 'header.name')
@@ -27,8 +27,8 @@ class Card(BasePage):
 
         return True
     
-    def show_all_cards(self):
+    def show_all_cards_todo(self):
         for card in self.take_all_cards():
             titulo = card.find_element(*self.name_card).text
             desc = card.find_element(*self.description_card).text
-            print(f'Card [Titulo: {titulo}, Descrição: {desc}]')
+            print(f'Card TODO [Titulo: {titulo}, Descrição: {desc}]')

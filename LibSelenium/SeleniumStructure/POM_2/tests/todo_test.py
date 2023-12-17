@@ -42,7 +42,7 @@ class TodoTest(unittest.TestCase):
 
         self.assertTrue(cards_element.urgent_cards_to_doing())
         self.assertTrue(cards_element.remove_cards_give_up())
-        cards_element.show_all_cards()
+        cards_element.show_all_cards_todo()
         time.sleep(10)
 
     def tearDown(self):
