@@ -27,6 +27,6 @@ PROJETC ------
 
 
 2 - Pode ocorrer alguns erros, como o de importação
-no documento Basico/Moculação, tem um exemplo de como
+no documento Basico/Modulação, tem um exemplo de como
 resolver isso usando sys e os
 
