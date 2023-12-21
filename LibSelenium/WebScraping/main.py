@@ -22,7 +22,7 @@ for book in books:
     
     livro = {
         'Título' : book_title,
-        'Estoque' : stock.replace('(', '').replace(' available)', '')
+        'Estoque' : stock.replace('In stock (', '').replace(' available)', '')
     } 
 
     obeject_book.append(livro)
