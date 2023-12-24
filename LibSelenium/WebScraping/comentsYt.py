@@ -12,7 +12,7 @@ from selenium.common.exceptions import WebDriverException
 options = webdriver.ChromeOptions()
 options.add_argument('--start-maximized')
 driver = webdriver.Chrome(options=options)
-driver.get('https://www.youtube.com/watch?v=DLMCd4f23_M&ab_channel=SOLUCIONANDOFILMES')
+driver.get('https://www.youtube.com/watch?v=BjTMGJRHQfo&ab_channel=CANALFAZERACONTECER')
 
 driver.execute_script('window.scrollBy(0, 600);')
 time.sleep(4)
@@ -24,7 +24,7 @@ count_section = WebDriverWait(driver, 20).until(
 )
 count_int = int(count_section.find_elements(By.TAG_NAME, 'span')[0].text.replace(',', ''))
 
-print(Fore.CYAN + 'Contando os comentarios, AGUARDE!!' + Fore.RESET)
+print(Fore.RED + 'Contando os comentarios, AGUARDE!!' + Fore.RESET)
 for i in range (0, count_int, 10):
     time.sleep(2)
     driver.execute_script('window.scrollBy(0, 1000);')
@@ -43,9 +43,13 @@ for comment in comments:
     comments_text = comment.find_element(By.ID, 'content-text')
     comments_texts.append({'Autor' : autor.text, 'Comentario' : comments_text.text})
 
+# GERAÇÃO DE XLSX FILE
 file_path = pathlib.Path(__file__).parent
 df = pd.DataFrame(comments_texts)
+name_file = r'' 
+data_pandas = df.to_excel(
+        r'C:\Users\pedro.elorriaga\Downloads\EstudosPy\LibSelenium\WebScraping' % name_file, 
+        sheet_name='Comentarios'
+        )
 
-# foi efetuado 
-data_pandas = df.to_excel(str(count_int) + 'comentarios.xlsx')
 print(Fore.GREEN + 'Concluido com sucesso!!' + Fore.RESET)
