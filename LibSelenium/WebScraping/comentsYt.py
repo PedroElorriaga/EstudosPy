@@ -12,10 +12,13 @@ from selenium.common.exceptions import WebDriverException
 options = webdriver.ChromeOptions()
 options.add_argument('--start-maximized')
 driver = webdriver.Chrome(options=options)
-driver.get('https://www.youtube.com/watch?v=BjTMGJRHQfo&ab_channel=CANALFAZERACONTECER')
+driver.get('https://www.youtube.com/watch?v=QDORlz17dm0&ab_channel=SOLUCIONANDOFILMES')
 
-driver.execute_script('window.scrollBy(0, 600);')
+driver.execute_script('window.scrollBy(0, 800);')
 time.sleep(4)
+driver.execute_script('window.scrollBy(0, 800);')
+
+eraser = '\r' + '' * 100
 
 # CONTADOR DE COMENTARIOS
 print(Fore.GREEN + 'Iniciando o programa' + Fore.RESET)
@@ -24,6 +27,7 @@ count_section = WebDriverWait(driver, 20).until(
 )
 count_int = int(count_section.find_elements(By.TAG_NAME, 'span')[0].text.replace(',', ''))
 
+# CARREGANDO OS COMENTARIOS OCULTOS
 print(Fore.RED + 'Contando os comentarios, AGUARDE!!' + Fore.RESET)
 for i in range (0, count_int, 10):
     time.sleep(2)
@@ -33,10 +37,9 @@ comments_section = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, 'contents'))
     )
 
-# COMENTARIOS
+# ITERANDO E COLOCANDO EM LISTA
 print(Fore.RED + 'Gerando arquivo...' + Fore.RESET)
 comments = comments_section.find_elements(By.CLASS_NAME, 'ytd-item-section-renderer')
-
 comments_texts = []
 for comment in comments:
     autor = comment.find_element(By.TAG_NAME, 'yt-formatted-string')
@@ -46,10 +49,10 @@ for comment in comments:
 # GERAÇÃO DE XLSX FILE
 file_path = pathlib.Path(__file__).parent
 df = pd.DataFrame(comments_texts)
-name_file = r'' 
-data_pandas = df.to_excel(
-        r'C:\Users\pedro.elorriaga\Downloads\EstudosPy\LibSelenium\WebScraping' % name_file, 
-        sheet_name='Comentarios'
-        )
+file_name = str(count_int) + '_comments.xlsx' 
+caminho_save = r'C:\Users\Pedro\Downloads\EstudosPy\LibSelenium\WebScraping'
+df.to_excel(str(caminho_save) + '\\' + file_name, sheet_name='Comentarios') # SALVANDO EM XLSX
 
 print(Fore.GREEN + 'Concluido com sucesso!!' + Fore.RESET)
+
+driver.quit()
