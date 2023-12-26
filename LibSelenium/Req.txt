@@ -2,8 +2,10 @@ Os requirements são parecidos com os package.json do JavaScript
 
 Como utilizar
 
-1 - Dentro do ambiente env ou venv ja com todas as libs
-que você deseja utilizar, digite o comando 
+Dentro do ambiente env ou venv ja com todas as libs
+que você deseja utilizar, 
+
+1 - Para criar o arquivo com as libs, digite o comando 
 
 ** python freeze > requirements.txt **
 
@@ -16,3 +18,15 @@ do projeto
 o seguinte código
 
 ** pip install -r requirements.txt **
+
+
+
+Utilizando o pipreqs
+
+Essa lib é utilizada quando queremos colocar libs especificas no 
+requirements
+
+** pip install pipreqs **
+
+1 - Escreva no terminal pipreqs --force e ira utilizar apenas
+as libs que estão sendo utilizadas no projeto
