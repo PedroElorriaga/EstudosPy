@@ -16,7 +16,7 @@ driver.get('https://www.youtube.com/watch?v=QDORlz17dm0&ab_channel=SOLUCIONANDOF
 
 driver.execute_script('window.scrollBy(0, 800);')
 time.sleep(4)
-driver.execute_script('window.scrollBy(0, 800);')
+driver.execute_script('window.scrollBy(0, 600);')
 
 eraser = '\r' + '' * 100
 
@@ -50,8 +50,7 @@ for comment in comments:
 file_path = pathlib.Path(__file__).parent
 df = pd.DataFrame(comments_texts)
 file_name = str(count_int) + '_comments.xlsx' 
-caminho_save = r'C:\Users\Pedro\Downloads\EstudosPy\LibSelenium\WebScraping'
-df.to_excel(str(caminho_save) + '\\' + file_name, sheet_name='Comentarios') # SALVANDO EM XLSX
+df.to_excel(str(file_path) + '\\' + file_name, sheet_name='Comentarios') # SALVANDO EM XLSX
 
 print(Fore.GREEN + 'Concluido com sucesso!!' + Fore.RESET)
 
