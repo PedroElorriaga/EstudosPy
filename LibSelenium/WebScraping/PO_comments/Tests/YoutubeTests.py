@@ -22,14 +22,21 @@ class YoutubeTest(unittest.TestCase):
         self.youtube_page = YoutubePage(self.webdriver)
         self.youtube_page.abrir_video_youtube('https://www.youtube.com/watch?v=QDORlz17dm0&ab_channel=SOLUCIONANDOFILMES')
 
-        # CARREGAR QUANTIDADE DE COMENTARIOS
-        self.youtube_page.carregar_quantidade_comentarios()
+        # CARREGAR QUANTIDADE DE COMENTARIOS CARREGANDO O SCRIPT
+        self.youtube_page.carregar_scroll_comentarios()
 
-        # PEGAR QUANTIDADE DE COMENTARIOS E CARREGAR TODOS COMENTARIOS
-        self.youtube_page.carregar_todos_comentarios(self.youtube_page.contar_comentarios_em_inteiros())
+        # PEGAR QUANTIDADE DE COMENTARIOS 
+        quantidade_comentarios = self.youtube_page.contar_quantidade_comentarios_em_inteiros()
+
+        # CARREGAR TODOS COMENTARIOS
+        comentarios_element = self.youtube_page.carregar_todos_comentarios(quantidade_comentarios)
 
         # LISTANDO TODOS OS COMENTARIOS EM FORMA DE TEXTO
-        ...
+        lista_comentarios = self.youtube_page.listando_todos_comentarios(comentarios_element)
+
+        # GERAR ARQUIVO XLSX
+        self.youtube_page.gerar_arquivo_xlsx(lista_comentarios)
+
     def tearDown(self):
         self.webdriver.quit()
 

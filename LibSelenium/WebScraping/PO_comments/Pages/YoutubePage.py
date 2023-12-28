@@ -5,6 +5,8 @@ folder_pages_path = os.path.join(file_path, '..')
 sys.path.append(folder_pages_path)
 
 import time
+import pathlib
+import pandas as pd
 from BasePage import BasePage
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -27,38 +29,51 @@ class YoutubePage(BasePage):
         self.web_driver.get(url)
 
 
-    def carregar_quantidade_comentarios(self):
+    def carregar_scroll_comentarios(self):
         self.web_driver.execute_script('window.scrollBy(0, 700);')
         time.sleep(4)
         self.web_driver.execute_script('window.scrollBy(0, 500);')
 
-    # TODO CONCERTAR BUG DESTA FUNÇÃO QUE RETORNAR O ERRO -> Message: invalid argument: 'using' must be a string
-    def contar_comentarios_em_inteiros(self):
+
+    def contar_quantidade_comentarios_em_inteiros(self):
         secao_quantidade = WebDriverWait(self.web_driver, 10).until(
             EC.presence_of_element_located(self.localizador_secao_titulo)
         )
 
-        return int(secao_quantidade.find_elements(self.localizador_quantidade_comentarios)[0].text.replace(',', ''))
+        return int(secao_quantidade.find_elements(*self.localizador_quantidade_comentarios)[0].text.replace(',', ''))
     
 
-    def carregar_todos_comentarios(self, callback):
-        print(callback)
-        for i in range (0, callback, 10):
-            time.sleep(2)
+    def carregar_todos_comentarios(self, secao_quantidade):
+        for i in range (0, secao_quantidade, 10):
+            time.sleep(3)
             self.web_driver.execute_script('window.scrollBy(0, 1000);')
 
         secao_comentarios = WebDriverWait(self.web_driver, 10).until(
             EC.presence_of_element_located(self.localizador_secao_comentarios)
         )
-    
 
-    def listando_todos_comentarios(self, callback):
+        return secao_comentarios
+
+    def listando_todos_comentarios(self, secao_comentarios):
         lista_comentarios = []
-        comentarios = callback.find_elements(self.localizador_comentarios)
+        comentarios = secao_comentarios.find_elements(*self.localizador_comentarios)
 
         for comentario in comentarios:
-            autor_id = comentario.find_element(self.localizador_autor_id)
-            texto_comentado = comentario.find_element(self.localizador_texto_comentado)
+            autor_id = comentario.find_element(*self.localizador_autor_id)
+            texto_comentado = comentario.find_element(*self.localizador_texto_comentado)
             lista_comentarios.append({'Autor' : autor_id.text, 'Comentario' : texto_comentado.text})
 
         return lista_comentarios
+
+
+    def gerar_arquivo_xlsx(self, lista_comentarios):
+        caminho_pai_arquivo = pathlib.Path(__file__).parent.parent # c:\Users\usuario\Downloads\EstudosPy\LibSelenium\WebScraping\PO_comments
+        data_frame = pd.DataFrame(lista_comentarios)
+        data_frame.to_excel(str(caminho_pai_arquivo) + '\\arquivos' + '\\' + self.gerar_nome_de_arquivo_xlsx(), sheet_name='Comentarios')
+
+
+    def gerar_nome_de_arquivo_xlsx(self):
+        seconds = str(time.time()).split('.')[0]
+        nome_arquivo = seconds + '_comentarios.xlsx'
+        return nome_arquivo
+    
