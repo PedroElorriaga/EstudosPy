@@ -6,16 +6,18 @@ sys.path.append(folder_pages_path)
 
 import time
 from BasePage import BasePage
-from seleniumpagefactory.Pagefactory import PageFactory
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-class YoutubePage(BasePage, PageFactory):
+class YoutubePage(BasePage):
 
-    locators = {
-        'localizador_quantidade_comentarios': ('CLASS_NAME', 'count-text'),
-    }
+    localizador_secao_titulo = (By.CLASS_NAME, 'count-text')
+    localizador_quantidade_comentarios = (By.TAG_NAME, 'span')
+    localizador_secao_comentarios = (By.ID, 'contents')
+    localizador_comentarios = (By.CLASS_NAME, 'ytd-item-section-renderer')
+    localizador_autor_id = (By.TAG_NAME, 'yt-formatted-string')
+    localizador_texto_comentado = (By.ID, 'content-text')
 
     def __init__(self, web_driver):
         super().__init__(web_driver)
@@ -30,22 +32,33 @@ class YoutubePage(BasePage, PageFactory):
         time.sleep(4)
         self.web_driver.execute_script('window.scrollBy(0, 500);')
 
-
+    # TODO CONCERTAR BUG DESTA FUNÇÃO QUE RETORNAR O ERRO -> Message: invalid argument: 'using' must be a string
     def contar_comentarios_em_inteiros(self):
-        section_quantidade = WebDriverWait(self.web_driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'count-text'))
+        secao_quantidade = WebDriverWait(self.web_driver, 10).until(
+            EC.presence_of_element_located(self.localizador_secao_titulo)
         )
-        return int(section_quantidade.find_elements(By.TAG_NAME, 'span')[0].text.replace(',', ''))
+
+        return int(secao_quantidade.find_elements(self.localizador_quantidade_comentarios)[0].text.replace(',', ''))
     
 
     def carregar_todos_comentarios(self, callback):
-        for i in range (0, callback(), 10):
+        print(callback)
+        for i in range (0, callback, 10):
             time.sleep(2)
             self.web_driver.execute_script('window.scrollBy(0, 1000);')
 
-        section_comentarios = WebDriverWait(self.web_driver, 10).until(
-            EC.presence_of_element_located((By.ID, 'contents'))
+        secao_comentarios = WebDriverWait(self.web_driver, 10).until(
+            EC.presence_of_element_located(self.localizador_secao_comentarios)
         )
-        
-        return section_comentarios
     
+
+    def listando_todos_comentarios(self, callback):
+        lista_comentarios = []
+        comentarios = callback.find_elements(self.localizador_comentarios)
+
+        for comentario in comentarios:
+            autor_id = comentario.find_element(self.localizador_autor_id)
+            texto_comentado = comentario.find_element(self.localizador_texto_comentado)
+            lista_comentarios.append({'Autor' : autor_id.text, 'Comentario' : texto_comentado.text})
+
+        return lista_comentarios

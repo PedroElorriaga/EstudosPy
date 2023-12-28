@@ -25,11 +25,11 @@ class YoutubeTest(unittest.TestCase):
         # CARREGAR QUANTIDADE DE COMENTARIOS
         self.youtube_page.carregar_quantidade_comentarios()
 
-        # PEGAR QUANTIDADE DE COMENTARIOS
-        self.youtube_page.contar_comentarios_em_inteiros()
-
-        # CARREGAR TODOS COMENTARIOS
+        # PEGAR QUANTIDADE DE COMENTARIOS E CARREGAR TODOS COMENTARIOS
         self.youtube_page.carregar_todos_comentarios(self.youtube_page.contar_comentarios_em_inteiros())
+
+        # LISTANDO TODOS OS COMENTARIOS EM FORMA DE TEXTO
+        ...
     def tearDown(self):
         self.webdriver.quit()
 
