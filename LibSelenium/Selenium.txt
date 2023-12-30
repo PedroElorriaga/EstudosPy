@@ -1,6 +1,6 @@
 # AUTOMAÇÕES PARA WEB
 
-OBS: VERSÃO v4.6.0 PRA CIMA NÃO PRECISA ESPECIFICAR O CHROMEDRIVER
+OBS: VERSÃO v4.0.0 PRA CIMA NÃO PRECISA ESPECIFICAR O CHROMEDRIVER
 
 
 1 - Escolhemos o sistema operacional e o navegador que iremos operar
@@ -43,6 +43,7 @@ para fazer com que o bloco de busca aguarde uma página dinamica carregar
 e é utlizado junto com o 
 from selenium.webdriver.support import expected_conditions as EC
 Primeiro ele executa o bloco que está abaixo dele, ex: 
+
 element = driver.find_element(By.NAME, self.locator)
 Caso ele não encontre, ai sim ele (WebDriverWait) é executado
 
@@ -51,13 +52,25 @@ from selenium.webdriver.common.action_chains import ActionChains -> É usado
 para utilizar hotkeys, exemplo CTRL + C
 
 
+from selenium.webdriver.support.ui import Select -> É utilizado para quando
+é necessario usar um select/option de uma página, ex:
+
+select_element = driver.find_element(By.NAME, 'selectomatic')
+select = Select(select_element)
+
+
 
 Alguns comandos:
 
-browser.back() -> Volta uma página na navegação
+driver.back() -> Volta uma página na navegação
 
-browser.get('URL') -> Acessa o link selecionado
+driver.get('URL') -> Acessa o link selecionado
 
-browser.execute_script('window.open("URL");') -> Abre um novo link em uma nova guia
+driver.execute_script('window.open("URL");') -> Abre um novo link em uma nova guia
 
-browser.switch_to.window(browser.window_handles[0]) -> Troca de guia
+driver.execute_script('window.stop();') -> Para de recarregar a página
+
+driver.switch_to.window(driver.window_handles[0]) -> Troca de guia
+
+driver.get_attribute('atributo') -> Pega o atributo de uma HTML
+
