@@ -74,3 +74,5 @@ driver.switch_to.window(driver.window_handles[0]) -> Troca de guia
 
 driver.get_attribute('atributo') -> Pega o atributo de uma HTML
 
+driver.refresh() -> Recarrega a página
+
