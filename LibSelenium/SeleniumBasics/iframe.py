@@ -19,7 +19,7 @@ try:
 except:
     print('Cookies ja locados')
 
-driver.switch_to.frame('bvmf_iframe')
+driver.switch_to.frame('bvmf_iframe') # QUANDO UTILIZAMOS IFRAME, DEVEMOS UTILIZAR ESTE MÉTODO
 
 tabela = driver.find_element(By.ID, 'tblDadosAjustes')
 th = tabela.find_element(By.TAG_NAME, 'th')
