@@ -9,18 +9,19 @@ COMO UTILIZAR:
 
 2 - Depois ativaremos o ambiente virtual -> . nome\Scripts\Activate.ps1
 Obs: Caso queira desativar o ambiente virtual -> deactivate
-Obs 2: Caso queira ativar o ambiente virual no cmd -> nome\Scripts\Activate.bat
+Obs 2: Caso queira ativar o ambiente virtual no cmd -> nome\Scripts\Activate.bat
 
 
 
 DICA #1
 
 Sofremos muito no começo la em 2020 quando tentamos configurar o python 
-tanto virtual, quando no VSCODE
+tanto virtual, quando no VSCODE, então aqui temos algumas dicas para ajudar
+caso sofra com tais problemas
 
 
 Quando quiser usar interpretadores e versões diferente de python
-Podemos executar -> py -3.10 venv env     ou      py -3.9 venv env
+Podemos executar na hora de criar o env -> py -3.10 venv env     ou      py -3.9 venv env
 
 
 Para configurar no code runner a execução do ambiente venv
@@ -40,4 +41,4 @@ Verifique se o código está com todas as dependencias instaladas
 no ambiente correto
 
 Caso o pip der erro de the system cannot find the file specified
-Rode o comando a seguIr -> python -m pip install -U --force pip
+Rode o comando a seguir -> python -m pip install -U --force pip
