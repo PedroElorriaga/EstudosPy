@@ -20,9 +20,7 @@ driver.execute_script('window.scrollBy(0, 800);')
 time.sleep(2.5)
 btn_read_more = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located((By.CLASS_NAME, 'btn-readmore'))
-)
-
-btn_read_more.click()
+).click()
 
 rankings = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located((By.TAG_NAME, 'tbody'))
