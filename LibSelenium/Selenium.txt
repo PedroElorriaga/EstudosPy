@@ -76,3 +76,8 @@ driver.get_attribute('atributo') -> Pega o atributo de uma HTML
 
 driver.refresh() -> Recarrega a página
 
+
+
+Exceptions comuns:
+
+https://www.browserstack.com/guide/exceptions-in-selenium-webdriver?utm_source=google&utm_medium=cpc&utm_platform=paidads&utm_content=645400465181&utm_campaign=Search-DSA-NB-T2Geo-Exp&utm_campaigncode=Guide-Page+1031549&utm_term=+&gad_source=1&gclid=Cj0KCQiAy9msBhD0ARIsANbk0A8_KOsae2X_S1j-N3xpfb2BXREfwBMo4TCMPjgStf2UrWMNw9-1y0oaAtNPEALw_wcB
