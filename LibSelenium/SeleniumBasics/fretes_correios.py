@@ -9,7 +9,7 @@ import time
 import pandas as pd
 import xlsxwriter
 
-df = pd.read_excel(r'C:\Users\Pedro\Downloads\EstudosPy\LibSelenium\SeleniumBasics\Arquivos_Download\Correios_frete.xlsx')
+df = pd.read_excel(r'C:\Users\Pedro\Downloads\EstudosPy\LibSelenium\SeleniumBasics\Arquivos_Download\Correios_frete.xlsx', sheet_name='Planilha1')
 
 entrega = []
 valor = []
@@ -81,5 +81,10 @@ for index, row in df.iterrows():
     driver.switch_to.window(driver.window_handles[0])
     driver.refresh()
 
-print(valor, entrega)
+data = {'Origem' : df.iloc[:,0], 'Destino' : df.iloc[:,1], 'Altura' : df.iloc[:,2], 'Largura' : df.iloc[:,3], 'Comprimento' : df.iloc[:,4], 'Peso' : df.iloc[:,5], 'Entrega' : entrega, 'Valor' : valor}
+df2 = pd.DataFrame(data)
+
+with pd.ExcelWriter(r'C:\Users\Pedro\Downloads\EstudosPy\LibSelenium\SeleniumBasics\Arquivos_Download\Correios_frete.xlsx', engine='openpyxl', mode='a') as writer:
+    df2.to_excel(writer, sheet_name='Dados_preenchidos', index=False)
+
 driver.quit()
