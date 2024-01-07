@@ -78,7 +78,7 @@ def pegandoDuplicadas():
     for conjunto in duplicados.items():
         print(f'O valor {conjunto[0]} apareceu {conjunto[1]} vezes')
 
-    print('Total duplicados: ', somaDosDuplicados)
+    print('Soma dos duplicados: ', somaDosDuplicados)
 
 pegandoDuplicadas()
 spacePrint()

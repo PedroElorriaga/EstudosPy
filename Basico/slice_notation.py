@@ -1,5 +1,5 @@
 """
-
+a[start:stop:step] -> [::-1] to invert a list
 a[start:stop]  # items start through stop-1
 a[start:]      # items start through the rest of the array
 a[:stop]       # items from the beginning through stop-1
