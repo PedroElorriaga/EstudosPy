@@ -1,0 +1,12 @@
+# 1 DE INICIO O GIT IRÁ PEDIR 3 INFORMAÇÕES
+
+- USER.NAME
+- USER.EMAIL
+- INIT.DEFAULT BRANCH
+
+COMANDOS DOS SEGUINTES:
+
+$- git config --global user.name "nome"   -ENTRE ASPAS
+$- git config --global user.email "email"    -ENTRE ASPAS
+$- git config --global init.default branch main
+
