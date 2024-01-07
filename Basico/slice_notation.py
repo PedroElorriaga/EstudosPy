@@ -10,8 +10,8 @@ a[:]           # a copy of the whole array
 
 lista = [0, 1, 2, 3, 4]
 
-print(lista[1:]) # OUTPUT [1, 2, 3, 4]
+print(lista[1:])  # OUTPUT [1, 2, 3, 4]
 
 texto = 'texto aqui'
 
-print(texto[:5]) # OUTPUT texto
+print(texto[:5])  # OUTPUT texto

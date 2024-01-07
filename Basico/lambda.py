@@ -3,12 +3,16 @@ from sintaxe import clear, spacePrint
 
 clear()
 
-lambdaQuadrado = lambda x: x * 2
 
-print(lambdaQuadrado(2)) # 4
+def lambdaQuadrado(x): return x * 2
+
+
+print(lambdaQuadrado(2))  # 4
 spacePrint()
 
-duplicarNumeros = lambda x,y: x * y
 
-print(duplicarNumeros(5,5))
+def duplicarNumeros(x, y): return x * y
+
+
+print(duplicarNumeros(5, 5))
 spacePrint()
