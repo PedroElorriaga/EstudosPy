@@ -10,3 +10,44 @@ $- git config --global user.name "nome"   -ENTRE ASPAS
 $- git config --global user.email "email"    -ENTRE ASPAS
 $- git config --global init.default branch main
 
+PARA DELETAR ALGUM VALOR DO GLOBAL EXECUTE:
+
+$- git config --global --unset o-valor.do-global
+
+
+
+# 2 DENTRO DA PASTA DO PROJETO NO QUAL IRÁ TRABALAHR
+DEVEMOS INICIALIZAR O GIT
+
+$- git init
+
+
+
+# 3 DEVEMOS FAZER O TRACK DOS ARQUIVOS
+PARA ISSO, PODEMOS EXECUTAR O SEGUINTE COMANDOS
+
+$- git add arquivo
+
+CASO PRECISE REVERTER UM ADD MAL ADICIONADO, EXECUTE:
+
+$- git restore arquivo
+ou
+$- git rm --cached arquivo
+
+
+
+# 4 AGORA IREMOS COMMITAR A ALTERAÇÃO, QUE É A CRIAÇÃO
+DE UM SNAPSHOT DOS ARQUIVOS
+PARA ISSO, BASTA ESCREVER O SEGUINTE CÓDIGO:
+
+$- git commit -m "comentario"    -ENTRE ASPAS
+
+
+
+# 5 PARA VERIFICAR AS MUDANÇAS DO COMMIT PODEMOS 
+UTILIZAR O SEGUINTE CÓDIGO:
+
+$- git diff
+
+PARA SAIR DO AMBIENTE APERTAMOS Q OU ESC
+
