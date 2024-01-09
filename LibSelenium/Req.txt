@@ -7,7 +7,7 @@ que você deseja utilizar,
 
 1 - Para criar o arquivo com as libs, digite o comando 
 
-** python freeze > requirements.txt **
+** pip freeze > requirements.txt **
 
 Isso criara um novo documento requirements.txt, e com esse documento
 você podera colocar no projeto ou no compartilhamento que fizer
