@@ -60,6 +60,28 @@ Autenticação:
 $- pip install fastapi
 
 instalaremos também o uvicorn, que é um framework
-baseado em asyncio
+baseado em asyncio, é parecido com nodemon
 
 $- pip install uvicorn
+
+
+
+# 2 INSTANCIANDO O FASTAPI
+Para isso podemos usar o documento main.py como exemplo
+o nome que usamos para guardar a instancia, sera o decorator que
+utilizara a requisição
+
+
+
+# 3 RODAR O SERVER
+Executaremos o UVICORN para executar o Server
+
+$- uvicorn nome_arquivo:app --reload -> para executar no modo listerning
+qualquer alteração que fizer, autmoaticamente ele atualiza o servidor
+
+Ou apenas precisaremos configurar o uvicorn no arquivo de código,
+igual no exemplo main.py
+
+DICA: Caso queira deixar o servidor disponivel no seu ip, para que outros dipositivos
+conectados na mesma rede consigam acessar, podemos usar o host='0.0.0.0' e quando for
+conectar, devemos usar o IP da máquina host
