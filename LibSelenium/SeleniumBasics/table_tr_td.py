@@ -45,7 +45,9 @@ for tr in tr_list[1:]:
 dados_filtrados = [dado for dado in dados if dado != []]
 
 data_frame = pd.DataFrame(dados_filtrados)
-data_frame.columns = ['Código', 'Valor de Mercado', 'P/L', 'P/VP', 'Margem Liquida', 'Setor']
-data_frame.to_excel(str(file_path) + '\\Arquivos_Download\\acoes.xlsx', sheet_name='Ações')
+data_frame.columns = ['Código', 'Valor de Mercado',
+                      'P/L', 'P/VP', 'Margem Liquida', 'Setor']
+data_frame.to_excel(
+    str(file_path) + '\\Arquivos_Download\\acoes.xlsx', sheet_name='Ações')
 
 driver.quit()
