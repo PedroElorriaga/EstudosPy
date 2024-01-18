@@ -85,3 +85,17 @@ igual no exemplo main.py
 DICA: Caso queira deixar o servidor disponivel no seu ip, para que outros dipositivos
 conectados na mesma rede consigam acessar, podemos usar o host='0.0.0.0' e quando for
 conectar, devemos usar o IP da máquina host
+
+DICA: Para acessar a documentação de sua API podemos acessar com http://localhost:8000/docs
+
+# 4 PATH PARAMETERS
+Primeiro devemos importar from fastapi import Path
+O path parameter é o que vem após a /
+EX: http://localhost:8000/cursos/path_parameter
+
+Dentro dos parametros da função do HTTP request(GET, PUT....)
+Devemos passar a seguinte informação get_curso(curso_id: int = Path(default=None, ..., ...))
+EX: get_curso(curso_id: int = Path(default=None, title='ID do curso', description='Blá blá'))
+
+CASE: vamos supor que o range do parametro precisa ser entre 1 E 2
+get_curso(Path(default=None, gt=0, lt=3)) gt=MAIOR QUE >  lt= MENOR QUE <
