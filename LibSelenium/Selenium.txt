@@ -76,6 +76,11 @@ driver.get_attribute('atributo') -> Pega o atributo de uma HTML
 
 driver.refresh() -> Recarrega a página
 
+driver.execute_script("arguments[0].scrollIntoView();", elements[0]) -> Roda scroll até vizualizar o elemento
+
+driver.execute_script("arguments[0].click();", elements[0]) -> Click utilizando JS
+
+
 
 
 Exceptions comuns:
