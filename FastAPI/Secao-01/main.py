@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, status, Response, Path
+from fastapi import FastAPI, HTTPException, status, Response, Path, Query, Header
 from pydantic import ValidationError
 from models import Curso
 
@@ -69,6 +69,15 @@ async def delete_curso(id_key: int):
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f'O curso com ID {id_key} não existe!')
+
+
+@app.get('/calcular')
+async def calcular(a: int, b: int = Query(default=10, ge=1), header: str = Header()):
+    soma = a + b
+
+    print(header)
+
+    return {'Resultado': soma}
 
 if __name__ == '__main__':
     import uvicorn

@@ -88,6 +88,9 @@ conectar, devemos usar o IP da máquina host
 
 DICA: Para acessar a documentação de sua API podemos acessar com http://localhost:8000/docs
 
+
+
+
 # 4 PATH PARAMETERS
 Primeiro devemos importar from fastapi import Path
 O path parameter é o que vem após a /
@@ -98,4 +101,37 @@ Devemos passar a seguinte informação get_curso(curso_id: int = Path(default=No
 EX: get_curso(curso_id: int = Path(default=None, title='ID do curso', description='Blá blá'))
 
 CASE: vamos supor que o range do parametro precisa ser entre 1 E 2
-get_curso(Path(default=None, gt=0, lt=3)) gt=MAIOR QUE >  lt= MENOR QUE <
+get_curso(curso_id: int = Path(default=None, gt=0, lt=3)) gt=MAIOR QUE >  lt= MENOR QUE <
+
+
+
+
+
+# 5 QUERY SELECTOR
+O query selector são chave e valor que passamos na URI do link
+
+/cursos/calculadora?a=1&b=2&c=10 
+
+(?)É utilizado para passar os paremteros após o link
+(&)É utilizado para separar os parametros
+
+Assim como no Path, podemos usar o metodo Query
+
+get_curso(a: int = Query(default=None, gt=0, lt=3)) gt=MAIOR QUE >  lt= MENOR QUE <
+
+
+
+
+# 6 HEADERS
+Traz algumas informações do header do site, como cookies, credenciais, tokens
+
+get_curso(header: str = Header(default=Non))
+
+
+
+
+# 7 INJEÇÃO DE DEPENDENCIAS
+Injeção de dependencias são funções que precisam ser executadas antes de outra
+função para que seja executada com sucesso
+
+Exemplo: Uma função que abre a conexão com um banco de dados 
