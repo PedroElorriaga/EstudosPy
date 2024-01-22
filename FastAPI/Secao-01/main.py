@@ -1,22 +1,13 @@
 from fastapi import FastAPI, HTTPException, status, Response, Path, Query, Header
+from typing import Dict, List
 from pydantic import ValidationError
-from models import Curso
+from models import Curso, cursos
 
-app = FastAPI()
-
-
-cursos = {
-    1: {
-        'titulo': 'Azure Cloud Fundamentals',
-        'aulas': 60,
-        'horas': 20
-    },
-    2: {
-        'titulo': 'Gestão de carreira',
-        'aulas': 35,
-        'horas': 9
-    }
-}
+app = FastAPI(
+    title='Documentação Curso API',
+    version='1.0.2',
+    description='Guia para manipulação de API'
+)
 
 
 @app.get('/cursos')
@@ -24,7 +15,10 @@ async def get_cursos() -> dict:
     return {'cursos disponiveis': cursos}
 
 
-@app.get('/cursos/{id_key}')
+@app.get('/cursos/{id_key}',
+         description='Retorna todos os cursos ou uma lista vazia',
+         summary='Retorna todos os cursos',
+         response_model=List[Curso])
 async def get_curso(id_key: int):
     try:
         curso: dict = cursos[id_key]

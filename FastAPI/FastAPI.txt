@@ -135,3 +135,14 @@ Injeção de dependencias são funções que precisam ser executadas antes de ou
 função para que seja executada com sucesso
 
 Exemplo: Uma função que abre a conexão com um banco de dados 
+
+
+
+
+# 8 MODIFICANDO NOSSA documentação
+
+app = FastAPI(
+    title = 'Titulo',
+    version = 'versão',
+    description = 'Descrição'
+)
