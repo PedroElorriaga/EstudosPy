@@ -10,18 +10,21 @@ app = FastAPI(
 )
 
 
-@app.get('/cursos')
-async def get_cursos() -> dict:
-    return {'cursos disponiveis': cursos}
+@app.get('/cursos',
+         response_description='Cursos',
+         summary='Coleta todos os cursos existentes',
+         response_model=List[Curso])
+async def get_cursos():
+    return cursos
 
 
 @app.get('/cursos/{id_key}',
-         description='Retorna todos os cursos ou uma lista vazia',
-         summary='Retorna todos os cursos',
-         response_model=List[Curso])
+         description='Retorna um curso',
+         summary='Retorna um curso')
 async def get_curso(id_key: int):
     try:
-        curso: dict = cursos[id_key]
+        curso = cursos[id_key]
+
         return curso
     except KeyError:
         raise HTTPException(
