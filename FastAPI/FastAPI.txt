@@ -152,3 +152,24 @@ Modificando uma rota
          response_description='Cursos',
          summary='Coleta todos os cursos existentes',
          response_model=List[Curso])
+
+
+# 9 SEPARANDO AS ROTAS (SIMILAR NO EXPRESS EM JS)
+
+Devemos instanciar a rota da seguinte maneira
+
+router = APIRouter() -> Depois de ter importado o APIRouter
+Exemplos em Secao_01_pt2/routes
+
+
+# 10 USANDO VALIDATOR COM PYDANTIC
+
+Primeiramente precisamos importar o validator no inicio do código
+
+from pydantic import validator
+
+Para utilzar iremos chamar o decorator 
+
+@validator('titulo')
+def função(cls, value):
+
