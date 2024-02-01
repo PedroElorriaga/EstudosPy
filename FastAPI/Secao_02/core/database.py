@@ -4,7 +4,7 @@ from core.configs import settings
 
 
 engine: AsyncEngine = create_async_engine(
-    settings.DB_URL)  # CRIA A CONEXÃO COM O BANCO DE DADOS
+    settings.DB_URL)  # ENGINE DE CONEXÃO COM O BANCO DE DADOS
 
 Session: AsyncSession = sessionmaker(
     autoflush=False,
