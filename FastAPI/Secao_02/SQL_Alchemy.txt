@@ -1,0 +1,14 @@
+SQLALCHEMY
+
+Para utilizar o SQLALCHEMY devemos instalar sua biblioteca
+
+$- pip install sqlalchemy pydantic-settings
+
+# O QUE É SCHEMA?
+Schema pega os dados de um arquivo python por exemplo, e transforma ele em json
+para que nossa API consiga consumir esses dados ou ao contrario, onde ele pega os dados
+de uma base de dados e tranforma em json para que possamos administrar esses dados com o
+python
+
+# O QUE É CORE?
+É onde colocaremos arquivo os arquivos de utilização comuns para API
