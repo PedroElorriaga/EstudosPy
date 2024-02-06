@@ -80,7 +80,7 @@ driver.execute_script("arguments[0].scrollIntoView();", elements[0]) -> Roda scr
 
 driver.execute_script("arguments[0].click();", elements[0]) -> Click utilizando JS
 
-
+driver.execute_script("arguments[0].removeAttribute('hidden');", element) -> Remove o atributo do JS
 
 
 Exceptions comuns:
