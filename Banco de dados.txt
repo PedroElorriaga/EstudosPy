@@ -1,0 +1,51 @@
+BANCO DE DADOS
+
+# DBMS ( DataBase Managment Software )
+
+São os softwares que utilizamos para gerenciar importações backups, entre outras coisas.
+Alguns conhecidos são o MYSQL, POSTGREE, ORACLE.
+
+Iremos utilizar o MySQL
+
+
+
+# INSTALAÇÃO
+
+- 1 Vamos fazer o download do MySQL Community 
+- 2 Iremos instalar de foma customizada, na seleção de produtos iremo selecionar o MySQL Server, MySQL Workbench e MySQL Shell
+
+
+
+# TABELAS
+As tabelas possuem Colunas:
+	-	-
+	-	-
+	-	-
+	-	-
+	-	-
+
+Linhas:
+--------------------------
+
+PrimaryKey:
+		Id: PK
+
+Dados:
+		Pedro
+
+
+
+# TABELAS RALACIONAIS
+É quando duas tabelas se relacionam para compartilhar informações, são conhecidas como ForeingKey
+
+
+
+# USE e SELECT
+São queries que fazemos para um banco de dados
+
+- USE sakila;      -> Significa que vamos utilizar o schema Sakila
+
+- SELECT actor_id FROM actor;        -> Selecionamos a coluna actor_id da tabela actor
+
+- SELECT * FROM actor;        -> Selecionamos tudo da tabela actor
+

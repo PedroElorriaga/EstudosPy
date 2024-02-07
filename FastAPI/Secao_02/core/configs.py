@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # SÃO AS CONFIGURAÇÕES GERAIS USADAS NA APLICAÇÃO
 class Settings(BaseSettings):
     API_V1_STR: str = '/api/v1'
-    DB_URL: str = ''
+    DB_URL: str = 'mysql://root:root@localhost:3380/cursoschema'
     DBBaseModel = declarative_base()
 
     class Config:
