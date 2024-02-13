@@ -1,5 +1,8 @@
 BANCO DE DADOS
 
+links:
+https://dev.mysql.com/doc/index-other.html
+
 # DBMS ( DataBase Managment Software )
 
 São os softwares que utilizamos para gerenciar importações backups, entre outras coisas.
@@ -16,7 +19,7 @@ Iremos utilizar o MySQL
 
 
 
-# TABELAS
+TABELAS
 As tabelas possuem Colunas:
 	-	-
 	-	-
@@ -40,6 +43,7 @@ Dados:
 
 
 
+
 # USE e SELECT
 São queries que fazemos para um banco de dados
 
@@ -48,4 +52,89 @@ São queries que fazemos para um banco de dados
 - SELECT actor_id FROM actor;        -> Selecionamos a coluna actor_id da tabela actor
 
 - SELECT * FROM actor;        -> Selecionamos tudo da tabela actor
+
+- SELECT actor_id,first_name FROM actor;      -> Selecionamos actor_id e first_name da tabela actor
+
+
+
+
+# WHERE
+Significa que iremos passar algumas condições de solicitação de dados
+
+SELECT * FROM actor where actor_id < 10;     -> Selecionamos os dados onde o actor_id for menor que 10
+
+SELECT * FROM actor where actor_id between 10 and 20;    -> Selecionamos os dados entre o actor_id for 10 e 20
+
+
+
+
+# ORDER BY
+Aqui podemos organizar a forma como os dados serão mostrados pra nós
+
+select * from payment ORDER BY amount desc;   -> Monstrara os dados na order do amount de forma decrescente
+
+select * from payment ORDER BY amount asc;    -> Monstrara os dados na order do amount de forma crescente
+
+
+
+
+# MODIFICANDO COLUNAS
+Conseguimos manipular as colunas
+
+select customer_id,amount, amount - (amount * 0.30) as discount
+from payment
+where customer_id = 2;    -> Aqui adicionamos uma coluna chamada discount com um desconto de 30% do valor de amount
+			  OBS: Utilizamos as nome_coluna para criar o nome da nossa coluna
+
+
+
+# IN
+Aqui nós procuramos dados que tem os valores que passamos ao utilizar IN
+
+select * from address where district in ('Texas', 'Oregon');     -> Irá buscar por dados que possuem os valores passados no distric
+
+
+
+
+
+# LIKE
+O operador like nós podemos filtar a partir de um determinado caractere
+
+select * from actor where first_name like 'p%';     -> Pega todos os dados onde o fist_name inicia com P
+						    OBS: Pode usar P maisculo ou p minusculo que o SQL não faz essa diferenciação
+select * from actor where first_name like '%A';     -> Pega todos os dados onde o fist_name termina com A
+
+
+
+
+# JOIN
+Com JOIN nós podemos filtrar dados de mais de uma tabela ao mesmo tempo
+
+select * from customer join payment on customer.customer_id = payment.payment_id;  
+Seleciona todos os dados onde o customer_id e payment_id for iguais
+
+
+select 
+customer.customer_id,
+customer.first_name,
+customer.email,
+payment.rental_id,
+payment.amount
+from customer
+join payment on customer.customer_id = payment.payment_id;
+Seleciona as colunas especificas pedidas e traz o valor delas
+
+
+
+
+
+# ALIAS
+Alias é uma abreviação
+
+from customer cus     -> Esse cus é uma abreviação de customer
+
+
+
+
+
 
