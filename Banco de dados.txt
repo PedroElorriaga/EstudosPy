@@ -137,4 +137,37 @@ from customer cus     -> Esse cus é uma abreviação de customer
 
 
 
+# INSERT INTO
+Este comando insere uma linha de dados em nossa tabela
 
+insert into language
+values (default, 'Português', '2024-02-12 21:30:00');
+
+Inseri os dados na tabela language    -> 7 | Português | 2024-02-12 21:30:00
+
+Podemos tambem especificar as colunas
+
+insert into language (language_id, name, last_update)
+values (default, 'Português', '2024-02-12 21:30:00');
+
+
+Adicionando varias colunas
+
+insert into language (language_id, name, last_update)
+values 
+	(default, 'Português', '2024-02-12 21:30:00'),
+	(default, 'Espanhol', '2024-02-12 21:30:00'),
+	(default, 'Tailândes', '2024-02-12 21:30:00');
+
+
+Adicionando dados em varias tabelas
+
+
+
+
+
+# COPIANDO TABELA - BACKUP
+Podemos copiar uma tabela por exemplo para fazer um backup
+
+create table payment_backup as
+select * from payment;
