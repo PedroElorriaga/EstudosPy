@@ -128,10 +128,13 @@ Seleciona as colunas especificas pedidas e traz o valor delas
 
 
 
+
 # ALIAS
 Alias é uma abreviação
 
 from customer cus     -> Esse cus é uma abreviação de customer
+
+
 
 
 
@@ -163,7 +166,19 @@ values
 Adicionando dados em varias tabelas
 
 
+# UPDATE
+Update faz a atualização de um valor
 
+update payment
+set amount = 15.00
+where payment_id = 1;        -> Atualiza o amount onde o payment_id for igual a 1
+
+
+# DELETE
+Deleta um valor
+
+DELETE FROM payment
+WHERE payment_id = 1001;     -> Atualiza o amount onde o payment_id for igual a 1001
 
 
 # COPIANDO TABELA - BACKUP
@@ -171,3 +186,109 @@ Podemos copiar uma tabela por exemplo para fazer um backup
 
 create table payment_backup as
 select * from payment;
+
+
+
+
+
+
+
+# FUNÇÕES
+MAX(valor) - Retorna o valor máximo
+SELECT MAX(amount) FROM payment
+
+MIN(valor) - Retorna o valor minimo
+SELECT MIN(amount) FROM payment
+
+AVG(valor) - Retorna a média
+SELECT AVG(amount) FROM payment
+
+SUM(valor) - Retorna a soma
+SELECT SUM(amount) FROM payment
+
+COUNT(valor) - Retorna a quantidade de
+SELECT COUNT(amount) FROM payment
+
+
+
+
+# GROUP BY
+Aqui conseguimos fazer agrupamentos de informações
+
+SELECT 
+	customer_id,
+	SUM(amount) as total
+FROM payment
+GROUP BY customer_id        -> Cada customer_id terá sua soma detalhada
+
+
+SELECT 
+	cus.customer_id,
+    	cus.first_name,
+    	cus.last_name,
+	SUM(amount) as total
+FROM payment pay
+JOIN customer cus USING(customer_id)          -> Using(valor) utiliza um valor como refencia
+GROUP BY customer_id 
+ORDER BY total DESC;
+
+
+
+
+# HAVING
+Conseguimos fazer um filtro dos dados utilizando o having ao inves do where
+
+SELECT 
+	cus.customer_id,
+    cus.first_name,
+    cus.last_name,
+	SUM(amount) as total
+FROM payment pay
+JOIN customer cus USING(customer_id)
+GROUP BY customer_id 
+HAVING total >= 160             -> Aqui seleciono depois do código ja ter filtrado alguns valores
+				e busco valor onde o total é maior que 160
+ORDER BY total DESC;
+
+
+
+
+
+# SUBQUERY
+É utilizado quando temos que fazer mais de uma querie
+
+SELECT *
+FROM payment 
+WHERE amount > (
+	SELECT AVG(amount)
+	FROM payment)     -> Irá retornar só valores acima da média de preços geral
+
+
+select customer_id, first_name, last_name, email 
+from customer 
+where customer_id in (
+	select customer_id
+	from payment
+	group by customer_id
+	having count(*) > 35
+);       -> Coletando informações em subqueries onde retornara valores de quem fez mais de
+	 35 compras
+
+
+
+
+
+# VIEWS
+Podemos fazer uma vizualização no campo de Views do nosso Schema onde podemos
+pegar nossos filtros de forma mais fácil
+
+create view visualizar_maiores_compradores_35 as
+select customer_id, first_name, last_name, email
+from customer where customer_id in (
+	select customer_id from payment
+    group by customer_id
+    having count(*) > 35
+    )
+
+Ao entrar em Views em nosso Schema, podemos acessar visualizar_maiores_compradores_35
+e pegar os dados
