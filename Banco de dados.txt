@@ -292,3 +292,33 @@ from customer where customer_id in (
 
 Ao entrar em Views em nosso Schema, podemos acessar visualizar_maiores_compradores_35
 e pegar os dados
+
+
+OBS: sempre que for criar, podemos criar da seguinte maneira
+
+CREATE OR REPLACE VIEW visualizar_maiores_compradores_35 as
+select customer_id, first_name, last_name, email
+from customer where customer_id in (
+	select customer_id from payment
+    group by customer_id
+    having count(*) > 35
+    )
+
+Porque com o replace, caso a view ja exista, ele substitui ela
+
+
+
+
+
+
+# STRING FUNCTIONS
+Documentação de apoio: https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
+
+select trim('             carros')  -> por exemplo, remove todo esse espaço do lado
+mas caso tivessemos usado o rtrim() ele só iria remover espaços que tivessme do lado
+direito
+
+select concat('Maça', 'Banana')  -> Junta as palavras MaçaBanana
+
+
+
