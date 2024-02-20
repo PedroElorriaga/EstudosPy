@@ -14,9 +14,83 @@ USE rent_cars_br;
 
 CREATE TABLE marcas_carros (
 	id INT NOT NULL AUTO_INCREMENT,
-    marca VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
+    	marca VARCHAR(255) NOT NULL,
+    	PRIMARY KEY (id)
 );
 
 	# ATUALIZANDO UMA TABELA
 	ALTER TABLE marcas_carros ADD origem VARCHAR(255) NOT NULL;
+
+
+
+# CRIANDO TABELAS DE INVENTARIOS COM FOREIGN KEY
+
+CREATE TABLE inventarios_carros (
+	id INT NOT NULL AUTO_INCREMENT,
+    	modelo VARCHAR(255) NOT NULL,
+    	transmissao VARCHAR(255) NOT NULL,
+    	motor FLOAT NOT NULL,
+    	combustivel VARCHAR(255) NOT NULL,
+    	marcas_id INT NOT NULL,
+    	PRIMARY KEY (id),
+    	FOREIGN KEY (marcas_id) REFERENCES marcas_carros(id)  -> REFERENCIA FK
+);
+
+
+
+
+# CRIANDO TABELAS DE CLIENTES
+
+CREATE TABLE clientes (
+	id INT NOT NULL AUTO_INCREMENT,
+    	nome VARCHAR(255) NOT NULL,
+    	sobrenome VARCHAR(255) NOT NULL,
+    	endereco VARCHAR(255) NOT NULL,
+    	PRIMARY KEY (id)
+);
+
+
+
+
+# CRIANDO TABELAS DE PAGAMENTOS
+
+CREATE TABLE pagamentos (
+	id INT NOT NULL AUTO_INCREMENT,
+    	valor FLOAT NOT NULL,
+    	periodo VARCHAR(255) NOT NULL,
+    	carro_id INT NOT NULL,
+    	cliente_id INT NOT NULL,
+    	PRIMARY KEY (id),
+    	FOREIGN KEY (carro_id) REFERENCES inventarios_carros(id),
+    	FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+
+
+
+# SQL DATA TYPES
+
+Link de apoio: https://www.w3schools.com/sql/sql_datatypes.asp
+
+
+
+
+# ATUALIZANDO A TABELA DE PAGAMENTOS
+
+ALTER TABLE pagamentos ADD data_do_pagamento DATE;
+
+
+
+
+
+# ADICIONANDO DADOS NA TABELA CLIENTES 
+
+INSERT INTO clientes (nome, sobrenome, endereco)
+VALUES ('Pedro', 'Elorriaga', 'Alameda Portugal, 205'),
+	('Julia', 'Matos', 'Alameda Madeira, 4016'),
+    	('Renan', 'Texeira', 'Rua Itaípu, 136'),
+	('Luan', 'Texeira', 'Rua Itaípu, 188'),
+    	('Leonardo', 'Matagal', 'Avenida Ibirá, APTO 22');
+
+
+

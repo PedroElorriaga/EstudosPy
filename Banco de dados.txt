@@ -127,14 +127,10 @@ Seleciona as colunas especificas pedidas e traz o valor delas
 
 
 
-
-
 # ALIAS
 Alias é uma abreviação
 
 from customer cus     -> Esse cus é uma abreviação de customer
-
-
 
 
 
@@ -191,8 +187,6 @@ select * from payment;
 
 
 
-
-
 # FUNÇÕES
 MAX(valor) - Retorna o valor máximo
 SELECT MAX(amount) FROM payment
@@ -208,7 +202,6 @@ SELECT SUM(amount) FROM payment
 
 COUNT(valor) - Retorna a quantidade de
 SELECT COUNT(amount) FROM payment
-
 
 
 
