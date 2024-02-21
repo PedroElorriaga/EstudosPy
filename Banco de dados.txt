@@ -303,7 +303,6 @@ Porque com o replace, caso a view ja exista, ele substitui ela
 
 
 
-
 # STRING FUNCTIONS
 Documentação de apoio: https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
 
@@ -315,3 +314,44 @@ select concat('Maça', 'Banana')  -> Junta as palavras MaçaBanana
 
 
 
+
+
+# USUARIOS E ACESSOS
+
+Como visualizar a tabela de usuarios:
+SELECT * FROM mysql.user;
+
+
+Como criar os usuários:
+CREATE USER nome@dominio IDENTIFIED BY 'senha';
+CREATE USER lucas@localhost IDENTIFIED BY '1234';
+
+
+Como remover os usuários:
+DROP USER nome@dominio;
+DROP USER christian@localhost;
+
+
+Alterando/Recuperando senha de usuário:
+SET PASSWORD nome@dominio = 'novasenha';
+SET PASSWORD leonardo@elorriagatec.com = '1234';
+
+
+Como mostrar privilégios:
+SHOW GRANTS FOR nome@dominio;
+
+
+Como dar privilégios aos usuários:
+GRANT SELECT, INSERT, UPDATE, DELETE ON rent_cars_br.* TO nome@dominio;
+GRANT SELECT, INSERT, UPDATE, DELETE ON rent_cars_br.* TO lucas@localhost;
+
+
+
+Criando um admin com super grants:
+GRANT ALL PRIVILEGES ON *.* ou *nomedoschema* TO 'nome'@'dominio';
+GRANT ALL PRIVILEGES ON *.* TO 'pedro'@'localhost';
+
+
+Removendo privilégios:
+REVOKE UPDATE ON schema.* FROM nome@dominio;
+REVOKE UPDATE ON rent_cars_br.* FROM lucas@localhost
