@@ -1,0 +1,73 @@
+1- Primeiro devemos instalar o Poetry no AMBIENTE VIRTUAL(Atenção)
+
+$- pip install poetry
+
+
+2- Depois precisamos instalar o setuptools para utilizar com POETRY
+
+$- pip install setuptools
+
+No poetry temos o arquivo chamado setup.py, que é onde iremos fazer
+as configurações do nosso pacote
+
+
+3- Criando a estrutura do projeto onde ele cria uma estrutura com tests
+e alguns outros arquivos
+
+$- poetry new nome_da_estrutura
+
+
+4- Agora para instalar as bibliotecas do poetry.
+
+- devemos entrar dentro da  estrutura que criamos, ele criara uma 
+virtual env automaticamente
+
+$- poetry install
+
+
+
+5- Instalando uma dependencia no poetry, igual o pip install
+
+$- poetry add dependencia    ou    poetry add --dev dependencia 
+
+Removendo
+
+$- poetry remove dependencia    ou    poetry remove --dev dependencia 
+
+
+
+
+6- Podemos criar scripts, parecido com o do JS usando package
+
+- No arquivo pyproject.toml, devemos fazer o seguinte passo:
+
+[tool.poetry.scripts]
+aula-poetry = 'aula_donussauro.cli:funcao'
+
+6.1- e para utilizar apenas executamos o seguinte comando dentro da pasta da estrutura:
+
+$- poetry run aula-poetry
+
+
+
+7- Para fazer o build da estrutura, basta executar o seguinte comando
+
+$- poetry build
+
+
+
+8- Configurando o token para executar o publish
+
+$- poetry config pypi-token.pypi seu_token_aqui
+
+
+
+9- Como publicar a estrutura
+
+$- poetry publish
+
+
+
+10- Atualização da estrututra
+
+$- poetry update
