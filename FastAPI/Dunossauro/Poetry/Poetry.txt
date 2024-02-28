@@ -71,3 +71,7 @@ $- poetry publish
 10- Atualização da estrututra
 
 $- poetry update
+
+$- poetry build
+
+$- poetry publish

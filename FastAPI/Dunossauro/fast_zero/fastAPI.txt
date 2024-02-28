@@ -1,0 +1,11 @@
+---@app.get('/') 
+expõem a nossa função para ser servida pelo FastAPI. 
+Dizendo que quando um cliente acessar o nosso endereço de rede no caminho /, 
+usando o método HTTP GET2, a função será executada.
+
+
+
+---uvicorn fast_zero.app:app    (uvicorn pasta.arquivo:variável)
+Esse comando diz ao uvicorn o seguinte: na pasta fast_zero existe um arquivo 
+chamado app. Dentro desse arquivo, temos uma aplicação para ser servida com o 
+nome de app.
