@@ -9,3 +9,89 @@ usando o método HTTP GET2, a função será executada.
 Esse comando diz ao uvicorn o seguinte: na pasta fast_zero existe um arquivo 
 chamado app. Dentro desse arquivo, temos uma aplicação para ser servida com o 
 nome de app.
+
+
+
+
+---ferramentas de desenvolvimento das aulas do dunossauro
+As ferramentas escolhidas são:
+
+taskipy: ferramenta usada para criação de comandos. Como executar a aplicação, rodar os testes, etc.
+ruff: um analisador estático de código (um linter), para dizer se não estamos infringido alguma boa prática de código
+blue: um formatador de código bastante amigável
+isort: uma ferramenta para ordenar os imports em ordem alfabética
+pytest: ferramenta para escrever e executar testes
+
+Instalando de modo dev:
+$- poetry add --group dev pytest pytest-cov taskipy blue ruff httpx isort
+
+
+
+
+---configurando as ferramentas de desenvolvimento
+Para configurar o ruff, definiremos o comprimento de linha para 79 caracteres (conforme sugerido na PEP-8) 
+e em seguida, informaremos que o diretório de ambiente virtual e o de migrações de banco de dados deverão ser 
+ignorados:
+
+
+[tool.ruff]
+line-length = 79
+exclude = ['.venv', 'migrations']
+
+
+isort. O único ponto de atenção é que o seu padrão de quebra de linha é diferente do formatador que usaremos o 
+blue. Para evitar conflitos de formatação entre o isort e o blue, definiremos o perfil de formatação como black, 
+pois o blue é um fork dele. Por padrão, a formatação do black utiliza 88 caracteres por linha, alteraremos para 79 
+que é a quantidade de caracteres permitidas por linha pelo blue e que também segue as recomendações da PEP-8:
+
+
+[tool.isort]
+profile = "black"
+line_length = 79
+extend_skip = ['migrations']
+
+
+O Pytest é uma framework de testes, que usaremos para escrever e executar nossos testes. O configuraremos para 
+reconhecer o caminho base para execução dos testes na raiz do projeto . :
+
+
+[tool.pytest.ini_options]
+pythonpath = "."
+
+
+blue. A ideia por trás do uso de um formatador é simplesmente padronizar toda a escrita do código. Como, por exemplo, 
+definimos strings entre ' ou entre "? Quando a linha exceder a 79 caracteres, como faremos a quebra de linha? Se 
+quebrarmos a linha, usaremos vírgula no último valor ou não? Com o foco de padronizar o código.
+Configuraremos o blue para somente excluir o caminho das migrações quando forem utilizadas:
+
+
+[tool.blue]
+extend-exclude = '(migrations/)'
+
+
+A ideia do Taskipy é ser um executor de tarefas (task runner) complementar em nossa aplicação. No lugar de ter 
+que lembrar comandos como o do uvicorn, que vimos na execução da aplicação, que tal substituir ele simplesmente por task run?
+Isso funcionaria para qualquer comando complicado em nossa aplicação. Simplificando as chamadas e também para não 
+termos que lembrar de como executar todos os comandos de cabeça.
+Alguns comandos que criaremos agora no início:
+
+
+[tool.taskipy.tasks]
+lint = 'ruff . && blue --check . --diff && isort --check . --diff'
+format = 'blue .  && isort .'
+run = 'uvicorn fast_zero.app:app --reload'
+pre_test = 'task lint'
+test = 'pytest -s -x --cov=fast_zero -vv'
+post_test = 'coverage html'
+
+Os comandos definidos fazem o seguinte:
+
+lint: executa o ruff para ver se não temos nenhum problema com o código, após isso faz a checagem da formatação com o blue 
+em relação a PEP-8. Caso nenhum dos dois apontem problemas, será feita uma checagem na ordenação dos imports com isort
+format: formata o código usando blue e isort
+run: executa o servidor de desenvolvimento do FastAPI
+pre_test: executa a camada de lint antes de executar os testes
+test: executa os testes com pytest de forma verbosa (-vv) e adiciona nosso código como base de cobertura
+post_test: gera um report de cobertura após os testes
+
+
