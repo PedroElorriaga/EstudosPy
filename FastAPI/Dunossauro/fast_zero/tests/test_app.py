@@ -9,4 +9,4 @@ def test_root_retornar_using_fastapi_e_retornar_status_200():
     response = client.get('/')  # Act
 
     assert response.status_code == 200  # Assert
-    assert response.json() == {'message': 'Using FastAPI'}  # Assert
+    assert response.text == '\n    <h1>Olá mundo!</h1>\n    '  # Assert

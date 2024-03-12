@@ -1,4 +1,5 @@
 ---@app.get('/') 
+
 expõem a nossa função para ser servida pelo FastAPI. 
 Dizendo que quando um cliente acessar o nosso endereço de rede no caminho /, 
 usando o método HTTP GET2, a função será executada.
@@ -6,6 +7,7 @@ usando o método HTTP GET2, a função será executada.
 
 
 ---uvicorn fast_zero.app:app    (uvicorn pasta.arquivo:variável)
+
 Esse comando diz ao uvicorn o seguinte: na pasta fast_zero existe um arquivo 
 chamado app. Dentro desse arquivo, temos uma aplicação para ser servida com o 
 nome de app.
@@ -29,6 +31,7 @@ $- poetry add --group dev pytest pytest-cov taskipy blue ruff httpx isort
 
 
 ---configurando as ferramentas de desenvolvimento
+
 Para configurar o ruff, definiremos o comprimento de linha para 79 caracteres (conforme sugerido na PEP-8) 
 e em seguida, informaremos que o diretório de ambiente virtual e o de migrações de banco de dados deverão ser 
 ignorados:
@@ -94,4 +97,94 @@ pre_test: executa a camada de lint antes de executar os testes
 test: executa os testes com pytest de forma verbosa (-vv) e adiciona nosso código como base de cobertura
 post_test: gera um report de cobertura após os testes
 
+Exemplo de uso:
+task run       -> Roda a aplicação
 
+task test      -> Roda os testes
+
+
+
+--- Cabeçalho
+
+O cabeçalho de uma mensagem HTTP contém metadados essenciais sobre a requisição ou resposta. Alguns elementos comuns que 
+podem ser incluídos no cabeçalho são:
+
+Content-Type: Especifica o tipo de mídia no corpo da mensagem. Por exemplo, Content-Type: application/json indica que o corpo 
+da mensagem está em formato JSON. Ou Content-Type: text/html, para mensagens que contém HTML.
+Authorization: Usado para autenticação, como tokens ou credenciais. (veremos mais disso nas aulas seguintes)
+Accept: Especifica o tipo de mídia que o cliente aceita, como application/json.
+Server: Fornece informações sobre o software do servidor.
+
+
+
+
+
+--- Códigos de respostas
+
+Os códigos são divididos em classes e as classes são distribuídas por centenas:
+
+1xx: informativo — utilizada para enviar informações para o cliente de que sua requisição foi recebida e está sendo processada.
+2xx: sucesso — Indica que a requisição foi bem-sucedida (por exemplo, 200 OK, 201 Created).
+3xx: redirecionamento — Informa que mais ações são necessárias para completar a requisição (por exemplo, 301 Moved Permanently, 302 Found).
+4xx: erro no cliente — Significa que houve um erro na requisição feita pelo cliente (por exemplo, 400 Bad Request, 404 Not Found).
+5xx: erro no servidor — Indica um erro no servidor ao processar a requisição válida do cliente (por exemplo, 500 Internal Server Error, 
+503 Service Unavailable).
+
+Para garantir que a resposta obtida pelo cliente seja considerada um sucesso, o FastAPI, por padrão, envia o código de sucesso 200 para o 
+método GET. No entanto, também podemos deixar isso explícito na definição da rota:
+
+@app.get("/", status_code=200)
+
+
+
+
+
+--- Documentação
+
+A documentação de uma API serve como um guia ou um manual, facilitando o entendimento e a utilização por desenvolvedores e usuários finais. 
+Ela desempenha um papel crucial ao:
+
+Definir claramente os endpoints e suas funcionalidades.
+Especificar os métodos HTTP suportados (GET, POST, PUT, DELETE, etc.).
+Descrever os parâmetros esperados em requisições e respostas.
+Fornecer exemplos de requisições e respostas para facilitar o entendimento.
+
+
+
+
+--- Contratos API´S(Schema)
+
+A este entendimento, denominamos schema, que atua como um contrato definindo a forma e o conteúdo dos dados trafegados.
+
+O schema de uma API desempenha um papel fundamental ao assegurar que ambos, cliente e servidor, estejam alinhados quanto à estrutura dos dados. 
+Este "contrato" especifica:
+
+Campos de Dados Esperados: quais campos são esperados na mensagem JSON, incluindo nomes de campos e tipos de dados (como strings, números, booleanos).
+Restrições Adicionais: como validações para tamanhos de strings, formatos de números e outros tipos de validação de dados.
+Estrutura de Objetos Aninhados: como os objetos são estruturados dentro do JSON, incluindo arrays e sub-objetos.
+
+
+
+
+
+
+--- Pydantic
+
+No universo de APIs e contratos de dados, especialmente ao trabalhar com Python, o Pydantic se destaca como uma ferramenta poderosa e versátil. 
+Essa biblioteca, altamente integrada ao ecossistema Python, especializa-se na criação de schemas de dados e na validação de tipos. Com o Pydantic, 
+é possível expressar schemas JSON de maneira elegante e eficiente através de classes Python, proporcionando uma ponte robusta entre a flexibilidade 
+do JSON e a segurança de tipos de Python.
+Vale ressaltar que o Pydantic é uma dependência integrada do FastAPI (não precisa ser instalado)
+
+Por exemplo, o schema JSON {'message': 'Olá mundo!'}. Com o Pydantic, podemos representar esse schema na forma de uma classe Python chamada Message. 
+Isso é feito de maneira intuitiva e direta:
+
+from pydantic import BaseModel
+
+class Message(BaseModel):
+    message: str
+
+A integração do modelo Pydantic (ou schema JSON) com o FastAPI é feita ao especificar o modelo no campo response_model do decorador do endpoint. 
+Isso garante que a resposta da API esteja alinhada com o schema definido, além de auxiliar na validação dos dados retornados:
+
+@app.get('/', status_code=200, response_model=Message)
