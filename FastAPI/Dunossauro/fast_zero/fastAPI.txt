@@ -188,3 +188,9 @@ A integração do modelo Pydantic (ou schema JSON) com o FastAPI é feita ao esp
 Isso garante que a resposta da API esteja alinhada com o schema definido, além de auxiliar na validação dos dados retornados:
 
 @app.get('/', status_code=200, response_model=Message)
+
+
+
+--- Usando documentação do dunossauro
+
+https://fastapidozero.dunossauro.com/03/

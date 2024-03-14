@@ -1,12 +1,38 @@
-from fastapi.testclient import TestClient
+def test_criar_usuario(client):
+    # client = TestClient(app)  # Arrange USADO SEM A FIXTURE tests\conftests.py
 
-from fast_zero.app import app
+    response = client.post(
+        '/users/',
+        json={
+            'username': 'PedroElorriaga',
+            'email': 'pedroadm@elorriaga.com',
+            'senha': 'gtavi2025',
+        },
+    )  # Act
+
+    assert response.status_code == 201  # Assert
+    assert response.json() == {
+        'username': 'PedroElorriaga',
+        'email': 'pedroadm@elorriaga.com',
+        'id': 2,
+    }
 
 
-def test_root_retornar_using_fastapi_e_retornar_status_200():
-    client = TestClient(app)  # Arrange
+def test_ler_usuarios(client):
+    response = client.get('/users/')
 
-    response = client.get('/')  # Act
-
-    assert response.status_code == 200  # Assert
-    assert response.text == '\n    <h1>Olá mundo!</h1>\n    '  # Assert
+    assert response.status_code == 200
+    assert response.json() == {
+        'usuarios': [
+            {
+                'username': 'PedroAdmin',
+                'email': 'pedroadmin@admin.com',
+                'id': 1,
+            },
+            {
+                'username': 'PedroElorriaga',
+                'email': 'pedroadm@elorriaga.com',
+                'id': 2,
+            },
+        ]
+    }
