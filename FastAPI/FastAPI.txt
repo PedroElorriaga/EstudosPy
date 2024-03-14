@@ -162,6 +162,7 @@ router = APIRouter() -> Depois de ter importado o APIRouter
 Exemplos em Secao_01_pt2/routes
 
 
+
 # 10 USANDO VALIDATOR COM PYDANTIC
 
 Primeiramente precisamos importar o validator no inicio do código
