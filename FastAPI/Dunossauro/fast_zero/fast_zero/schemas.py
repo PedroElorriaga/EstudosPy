@@ -19,3 +19,7 @@ class UsuarioDB(UsuarioSchema):
 
 class UsuarioLista(BaseModel):
     usuarios: list[UsuarioPublic]
+
+
+class Message(BaseModel):
+    mensagem: str

@@ -36,3 +36,30 @@ def test_ler_usuarios(client):
             },
         ]
     }
+
+
+def test_atualizar_usuario(client):
+    response = client.put(
+        '/users/1',
+        json={
+            'username': 'PedroAdmin',
+            'email': 'pedro@admin.com',
+            'senha': 'HASH554781412',
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json() == {
+        'username': 'PedroAdmin',
+        'email': 'pedro@admin.com',
+        'id': 1,
+    }
+
+
+def test_excluir_usuario(client):
+    response = client.delete('/users/1')
+
+    assert response.status_code == 200
+    assert response.json() == {
+        'mensagem': 'Usuário excluido com sucesso!',
+    }
