@@ -53,3 +53,9 @@ def excluir_usuario(user_id: int):
     del database[user_id - 1]
 
     return {'mensagem': 'Usuário excluido com sucesso!'}
+
+
+@app.get('/users/{user_id}', status_code=200, response_model=UsuarioPublic)
+def ler_um_usuario(user_id: int):
+    usuario = database[user_id - 1]
+    return usuario

@@ -63,3 +63,33 @@ def test_excluir_usuario(client):
     assert response.json() == {
         'mensagem': 'Usuário excluido com sucesso!',
     }
+
+
+def test_atualizar_usuario_retornar_404(client):
+    response = client.put(
+        '/users/3',
+        json={
+            'username': 'PedroErrorTest',
+            'email': 'pedroTestError@admin.com',
+            'senha': 'Error404',
+        },
+    )
+
+    assert response.status_code == 404
+
+
+def test_excluir_usuario_retornar_404(client):
+    response = client.delete('/users/2')
+
+    assert response.status_code == 404
+
+
+def test_ler_um_usuario(client):
+    response = client.get('/users/1')
+
+    assert response.status_code == 200
+    assert response.json() == {
+        'username': 'PedroElorriaga',
+        'email': 'pedroadm@elorriaga.com',
+        'id': 2,
+    }
