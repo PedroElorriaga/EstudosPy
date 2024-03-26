@@ -1,5 +1,9 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
+from fast_zero.database import get_session
+from fast_zero.models import Usuario
 from fast_zero.schemas import (
     Message,
     UsuarioDB,
@@ -21,11 +25,25 @@ database = [
 
 
 # Status de esperado e Modelo de resposta esperado
-@app.post('/users/', status_code=201, response_model=UsuarioPublic)
-def criar_usuarios(usuario: UsuarioSchema):
-    usuario_com_id = UsuarioDB(**usuario.model_dump(), id=len(database) + 1)
-    database.append(usuario_com_id)
-    return usuario_com_id
+@app.post('/users', status_code=201, response_model=UsuarioPublic)
+def criar_usuarios(
+    usuario: UsuarioSchema, session: Session = Depends(get_session)
+):
+    db_usuario = session.scalar(
+        select(Usuario).where(Usuario.username == usuario.username)
+    )
+
+    if db_usuario:
+        raise HTTPException(status_code=400, detail='Username já existe')
+
+    db_usuario = Usuario(
+        username=usuario.username, email=usuario.email, senha=usuario.senha
+    )
+    session.add(db_usuario)
+    session.commit()
+    session.refresh(db_usuario)
+
+    return db_usuario
 
 
 @app.get('/users/', status_code=200, response_model=UsuarioLista)

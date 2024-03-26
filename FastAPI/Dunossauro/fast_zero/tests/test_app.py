@@ -2,7 +2,7 @@ def test_criar_usuario(client):
     # client = TestClient(app)  # Arrange USADO SEM A FIXTURE tests\conftests.py
 
     response = client.post(
-        '/users/',
+        '/users',
         json={
             'username': 'PedroElorriaga',
             'email': 'pedroadm@elorriaga.com',
@@ -14,7 +14,7 @@ def test_criar_usuario(client):
     assert response.json() == {
         'username': 'PedroElorriaga',
         'email': 'pedroadm@elorriaga.com',
-        'id': 2,
+        'id': 1,
     }
 
 
