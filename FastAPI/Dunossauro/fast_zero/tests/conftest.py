@@ -6,7 +6,7 @@ from sqlalchemy.pool import StaticPool
 
 from fast_zero.app import app
 from fast_zero.database import get_session
-from fast_zero.models import Base
+from fast_zero.models import Base, Usuario
 
 
 @pytest.fixture
@@ -34,3 +34,15 @@ def session():
     Base.metadata.create_all(engine)
     yield Session()
     Base.metadata.drop_all(engine)
+
+
+@pytest.fixture
+def usuario(session):
+    usuario = Usuario(
+        username='teste', email='teste@email.com', senha='senha123'
+    )
+    session.add(usuario)
+    session.commit()
+    session.refresh(usuario)
+
+    return usuario

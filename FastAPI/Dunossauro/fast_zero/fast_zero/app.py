@@ -6,22 +6,12 @@ from fast_zero.database import get_session
 from fast_zero.models import Usuario
 from fast_zero.schemas import (
     Message,
-    UsuarioDB,
     UsuarioLista,
     UsuarioPublic,
     UsuarioSchema,
 )
 
 app = FastAPI()
-
-database = [
-    {
-        'id': 1,
-        'username': 'PedroAdmin',
-        'email': 'pedroadmin@admin.com',
-        'senha': 'HASH554781412',
-    },
-]
 
 
 # Status de esperado e Modelo de resposta esperado
@@ -46,29 +36,48 @@ def criar_usuarios(
     return db_usuario
 
 
-@app.get('/users/', status_code=200, response_model=UsuarioLista)
-def ler_usuarios():
-    return {'usuarios': database}
+@app.get('/users', status_code=200, response_model=UsuarioLista)
+def ler_usuarios(
+    skip: int = 0, limite: int = 100, session: Session = Depends(get_session)
+):
+    db_usuarios = session.scalars(
+        select(Usuario).offset(skip).limit(limite)
+    ).all()
+
+    return {'usuarios': db_usuarios}
 
 
 @app.put('/users/{user_id}', status_code=200, response_model=UsuarioPublic)
-def atualizar_usuarios(user_id: int, usuario: UsuarioSchema):
-    if user_id > len(database) or user_id < 1:
-        raise HTTPException(status_code=404, detail='Usuário não encontrado')
+def atualizar_usuarios(
+    user_id: int,
+    usuario: UsuarioSchema,
+    session: Session = Depends(get_session),
+):
+    db_usuario = session.scalar(select(Usuario).where(Usuario.id == user_id))
 
-    usuario_com_id = UsuarioDB(**usuario.model_dump(), id=user_id)
-    # REFERE AO PRIMEIRO ITEM DA LISTA DATABASE [0]
-    database[user_id - 1] = usuario_com_id
+    if not db_usuario:
+        raise HTTPException(
+            status_code=404, detail=f'Usuário com ID {user_id} não encontrado'
+        )
 
-    return usuario_com_id
+    db_usuario.username = usuario.username
+    db_usuario.email = usuario.email
+    db_usuario.senha = usuario.senha
+    session.commit()
+    session.refresh(db_usuario)
+
+    return db_usuario
 
 
 @app.delete('/users/{user_id}', status_code=200, response_model=Message)
-def excluir_usuario(user_id: int):
-    if user_id > len(database) or user_id < 1:
-        raise HTTPException(status_code=404, detail='Usuário não encontrado')
+def excluir_usuario(user_id: int, session: Session = Depends(get_session)):
+    db_usuario = session.scalar(select(Usuario).where(Usuario.id == user_id))
 
-    del database[user_id - 1]
+    if not db_usuario:
+        raise HTTPException(status_code=404, detail='O usuário não existe')
+
+    session.delete(db_usuario)
+    session.commit()
 
     return {'mensagem': 'Usuário excluido com sucesso!'}
 

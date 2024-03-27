@@ -1,3 +1,6 @@
+from fast_zero.schemas import UsuarioPublic
+
+
 def test_criar_usuario(client):
     # client = TestClient(app)  # Arrange USADO SEM A FIXTURE tests\conftests.py
 
@@ -19,44 +22,38 @@ def test_criar_usuario(client):
 
 
 def test_ler_usuarios(client):
-    response = client.get('/users/')
+    response = client.get('/users')
 
     assert response.status_code == 200
-    assert response.json() == {
-        'usuarios': [
-            {
-                'username': 'PedroAdmin',
-                'email': 'pedroadmin@admin.com',
-                'id': 1,
-            },
-            {
-                'username': 'PedroElorriaga',
-                'email': 'pedroadm@elorriaga.com',
-                'id': 2,
-            },
-        ]
-    }
+    assert response.json() == {'usuarios': []}
 
 
-def test_atualizar_usuario(client):
+def test_ler_usuarios_com_usuarios(client, usuario):
+    user_schema = UsuarioPublic.model_validate(usuario).model_dump()
+    response = client.get('/users')
+
+    assert response.json() == {'usuarios': [user_schema]}
+
+
+def test_atualizar_usuario(client, usuario):
     response = client.put(
         '/users/1',
         json={
-            'username': 'PedroAdmin',
-            'email': 'pedro@admin.com',
-            'senha': 'HASH554781412',
+            'username': 'Pedrinho',
+            'email': 'pedrinho.senior@test.com',
+            'senha': 'adm123',
         },
     )
 
     assert response.status_code == 200
     assert response.json() == {
-        'username': 'PedroAdmin',
-        'email': 'pedro@admin.com',
+        'username': 'Pedrinho',
+        'email': 'pedrinho.senior@test.com',
         'id': 1,
     }
 
 
-def test_excluir_usuario(client):
+def test_excluir_usuario(client, usuario):
     response = client.delete('/users/1')
 
     assert response.status_code == 200
