@@ -82,7 +82,6 @@ def excluir_usuario(user_id: int, session: Session = Depends(get_session)):
     return {'mensagem': 'Usuário excluido com sucesso!'}
 
 
-@app.get('/users/{user_id}', status_code=200, response_model=UsuarioPublic)
-def ler_um_usuario(user_id: int):
-    usuario = database[user_id - 1]
-    return usuario
+# @app.get('/users/{user_id}', status_code=200, response_model=UsuarioPublic)
+# def ler_um_usuario(user_id: int):
+#     return usuario

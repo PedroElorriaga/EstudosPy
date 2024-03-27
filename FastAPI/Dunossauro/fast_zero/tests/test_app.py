@@ -21,6 +21,19 @@ def test_criar_usuario(client):
     }
 
 
+def test_criar_usuario_existente_retornar_400(client, usuario):
+    response = client.post(
+        '/users',
+        json={
+            'username': 'teste',
+            'email': 'teste.existente@test.com',
+            'senha': 'Senh@123',
+        },
+    )
+
+    assert response.status_code == 400
+
+
 def test_ler_usuarios(client):
     response = client.get('/users')
 
@@ -62,9 +75,9 @@ def test_excluir_usuario(client, usuario):
     }
 
 
-def test_atualizar_usuario_retornar_404(client):
+def test_atualizar_usuario_retornar_404(client, usuario):
     response = client.put(
-        '/users/3',
+        '/users/2',
         json={
             'username': 'PedroErrorTest',
             'email': 'pedroTestError@admin.com',
@@ -75,7 +88,7 @@ def test_atualizar_usuario_retornar_404(client):
     assert response.status_code == 404
 
 
-def test_excluir_usuario_retornar_404(client):
+def test_excluir_usuario_retornar_404(client, usuario):
     response = client.delete('/users/2')
 
     assert response.status_code == 404
