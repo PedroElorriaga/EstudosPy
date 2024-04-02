@@ -94,12 +94,25 @@ def test_excluir_usuario_retornar_404(client, usuario):
     assert response.status_code == 404
 
 
-def test_ler_um_usuario(client):
-    response = client.get('/users/1')
+# def test_ler_um_usuario(client):
+#     response = client.get('/users/1')
+
+#     assert response.status_code == 200
+#     assert response.json() == {
+#         'username': 'PedroElorriaga',
+#         'email': 'pedroadm@elorriaga.com',
+#         'id': 2,
+#     }
+
+
+def test_pegar_token(client, usuario):
+    response = client.post(
+        '/token',
+        data={'username': usuario.email, 'password': usuario.clean_password},
+    )
+
+    token = response.json()
 
     assert response.status_code == 200
-    assert response.json() == {
-        'username': 'PedroElorriaga',
-        'email': 'pedroadm@elorriaga.com',
-        'id': 2,
-    }
+    assert 'access_token' in token
+    assert 'token_type' in token

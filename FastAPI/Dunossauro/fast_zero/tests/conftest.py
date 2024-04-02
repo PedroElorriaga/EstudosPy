@@ -7,6 +7,7 @@ from sqlalchemy.pool import StaticPool
 from fast_zero.app import app
 from fast_zero.database import get_session
 from fast_zero.models import Base, Usuario
+from fast_zero.security import criar_hash_de_senha
 
 
 @pytest.fixture
@@ -39,10 +40,14 @@ def session():
 @pytest.fixture
 def usuario(session):
     usuario = Usuario(
-        username='teste', email='teste@email.com', senha='senha123'
+        username='teste',
+        email='teste@email.com',
+        senha=criar_hash_de_senha('senha123'),
     )
     session.add(usuario)
     session.commit()
     session.refresh(usuario)
+
+    usuario.clean_password = 'senha123'
 
     return usuario

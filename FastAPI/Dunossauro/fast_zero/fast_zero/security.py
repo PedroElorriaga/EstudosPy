@@ -16,3 +16,11 @@ def criar_token_de_acesso(data: dict):
     encoded_jwt = encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
     return encoded_jwt
+
+
+def criar_hash_de_senha(senha: str):
+    return pwd_context.hash(senha)
+
+
+def verificar_hash_de_senha(senha: str, senha_hash: str):
+    return pwd_context.verify(senha, senha_hash)
