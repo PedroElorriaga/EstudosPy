@@ -15,6 +15,7 @@ from fast_zero.schemas import (
 from fast_zero.security import (
     criar_hash_de_senha,
     criar_token_de_acesso,
+    pegar_usuario_atual,
     verificar_hash_de_senha,
 )
 
@@ -61,31 +62,34 @@ def atualizar_usuarios(
     user_id: int,
     usuario: UsuarioSchema,
     session: Session = Depends(get_session),
+    usuario_atual: Usuario = Depends(pegar_usuario_atual),
 ):
-    db_usuario = session.scalar(select(Usuario).where(Usuario.id == user_id))
-
-    if not db_usuario:
+    if usuario_atual.id != user_id:
         raise HTTPException(
-            status_code=404, detail=f'Usuário com ID {user_id} não encontrado'
+            status_code=400, detail='Não possui permissões suficientes'
         )
 
-    db_usuario.username = usuario.username
-    db_usuario.email = usuario.email
-    db_usuario.senha = criar_hash_de_senha(usuario.senha)
+    usuario_atual.username = usuario.username
+    usuario_atual.email = usuario.email
+    usuario_atual.senha = criar_hash_de_senha(usuario.senha)
     session.commit()
-    session.refresh(db_usuario)
+    session.refresh(usuario_atual)
 
-    return db_usuario
+    return usuario_atual
 
 
 @app.delete('/users/{user_id}', status_code=200, response_model=Message)
-def excluir_usuario(user_id: int, session: Session = Depends(get_session)):
-    db_usuario = session.scalar(select(Usuario).where(Usuario.id == user_id))
+def excluir_usuario(
+    user_id: int,
+    session: Session = Depends(get_session),
+    usuario_atual: Usuario = Depends(pegar_usuario_atual),
+):
+    if usuario_atual.id != user_id:
+        raise HTTPException(
+            status_code=400, detail='Não possui permissões suficientes'
+        )
 
-    if not db_usuario:
-        raise HTTPException(status_code=404, detail='O usuário não existe')
-
-    session.delete(db_usuario)
+    session.delete(usuario_atual)
     session.commit()
 
     return {'mensagem': 'Usuário excluido com sucesso!'}

@@ -41,16 +41,17 @@ def test_ler_usuarios(client):
     assert response.json() == {'usuarios': []}
 
 
-def test_ler_usuarios_com_usuarios(client, usuario):
+def test_ler_usuarios_com_dados(client, usuario):
     user_schema = UsuarioPublic.model_validate(usuario).model_dump()
     response = client.get('/users')
 
     assert response.json() == {'usuarios': [user_schema]}
 
 
-def test_atualizar_usuario(client, usuario):
+def test_atualizar_usuario(client, usuario, token):
     response = client.put(
-        '/users/1',
+        f'/users/{usuario.id}',
+        headers={'Authorization': f'Bearer {token}'},
         json={
             'username': 'Pedrinho',
             'email': 'pedrinho.senior@test.com',
@@ -66,8 +67,10 @@ def test_atualizar_usuario(client, usuario):
     }
 
 
-def test_excluir_usuario(client, usuario):
-    response = client.delete('/users/1')
+def test_excluir_usuario(client, usuario, token):
+    response = client.delete(
+        f'/users/{usuario.id}', headers={'Authorization': f'Bearer {token}'}
+    )
 
     assert response.status_code == 200
     assert response.json() == {
@@ -75,9 +78,10 @@ def test_excluir_usuario(client, usuario):
     }
 
 
-def test_atualizar_usuario_retornar_404(client, usuario):
+def test_atualizar_usuario_retornar_400(client, usuario, token):
     response = client.put(
         '/users/2',
+        headers={'Authorization': f'Bearer {token}'},
         json={
             'username': 'PedroErrorTest',
             'email': 'pedroTestError@admin.com',
@@ -85,13 +89,15 @@ def test_atualizar_usuario_retornar_404(client, usuario):
         },
     )
 
-    assert response.status_code == 404
+    assert response.status_code == 400
 
 
-def test_excluir_usuario_retornar_404(client, usuario):
-    response = client.delete('/users/2')
+def test_excluir_usuario_retornar_400(client, usuario, token):
+    response = client.delete(
+        '/users/2', headers={'Authorization': f'Bearer {token}'}
+    )
 
-    assert response.status_code == 404
+    assert response.status_code == 400
 
 
 # def test_ler_um_usuario(client):
