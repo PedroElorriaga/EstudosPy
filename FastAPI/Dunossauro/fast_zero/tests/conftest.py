@@ -48,6 +48,7 @@ def usuario(session):
     session.commit()
     session.refresh(usuario)
 
+    # hook no modelo que processa os dados antes de salvá-los no banco de dados
     usuario.clean_password = 'senha123'
 
     return usuario
