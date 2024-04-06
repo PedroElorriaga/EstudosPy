@@ -19,7 +19,7 @@ $- poetry new nome_da_estrutura
 
 4- Agora para instalar as bibliotecas do poetry.
 
-- devemos entrar dentro da  estrutura que criamos, ele criara uma 
+- devemos entrar dentro da estrutura/pasta que criamos anteriormente, ele criara uma 
 virtual env automaticamente
 
 $- poetry install
