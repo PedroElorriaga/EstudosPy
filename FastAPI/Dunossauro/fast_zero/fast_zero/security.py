@@ -34,7 +34,7 @@ def verificar_hash_de_senha(senha: str, senha_hash: str):
     return pwd_context.verify(senha, senha_hash)
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='auth/token')
 
 
 async def pegar_usuario_atual(

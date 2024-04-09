@@ -57,7 +57,7 @@ def usuario(session):
 @pytest.fixture
 def token(client, usuario):
     response = client.post(
-        '/token',
+        '/auth/token',
         data={'username': usuario.email, 'password': usuario.clean_password},
     )
 
