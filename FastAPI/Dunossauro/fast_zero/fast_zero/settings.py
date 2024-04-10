@@ -7,3 +7,6 @@ class Configuracoes(BaseSettings):
     )
 
     DATABASE_URL: str
+    SECRET_KEY: str
+    ALGORITHM: str
+    ACESS_TOKEN_EXPIRE_MINUTES: int

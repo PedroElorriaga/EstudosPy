@@ -10,18 +10,21 @@ from sqlalchemy.orm import Session
 from fast_zero.database import get_session
 from fast_zero.models import Usuario
 from fast_zero.schemas import TokenData
+from fast_zero.settings import Configuracoes
 
-SECRET_KEY = 'chave-secreta'
-ALGORITHM = 'HS256'
-ACESS_TOKEN_EXPIRE_MINUTES = 30
+configuracoes = Configuracoes()
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 
 def criar_token_de_acesso(data: dict):
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.utcnow() + timedelta(
+        minutes=configuracoes.ACESS_TOKEN_EXPIRE_MINUTES
+    )
     to_encode.update({'exp': expire})
-    encoded_jwt = encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = encode(
+        to_encode, configuracoes.SECRET_KEY, algorithm=configuracoes.ALGORITHM
+    )
 
     return encoded_jwt
 
@@ -48,7 +51,11 @@ async def pegar_usuario_atual(
     )
 
     try:
-        payload = decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = decode(
+            token,
+            configuracoes.SECRET_KEY,
+            algorithms=[configuracoes.ALGORITHM],
+        )
         # 'sub' normalmente usado para armazenar o identificador do usuário no token JWT
         username: str = payload.get('sub')
         if not username:

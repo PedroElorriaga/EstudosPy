@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -12,13 +14,17 @@ from fast_zero.schemas import (
 )
 from fast_zero.security import criar_hash_de_senha, pegar_usuario_atual
 
+Session = Annotated[Session, Depends(get_session)]
+UsuarioAtual = Annotated[Usuario, Depends(pegar_usuario_atual)]
+
 router = APIRouter(prefix='/users', tags=['users'])
 
 
 # Status de esperado e Modelo de resposta esperado
 @router.post('/', status_code=201, response_model=UsuarioPublic)
 def criar_usuarios(
-    usuario: UsuarioSchema, session: Session = Depends(get_session)
+    usuario: UsuarioSchema,
+    session: Session,
 ):
     db_usuario = session.scalar(
         select(Usuario).where(Usuario.username == usuario.username)
@@ -41,7 +47,9 @@ def criar_usuarios(
 
 @router.get('/', status_code=200, response_model=UsuarioLista)
 def ler_usuarios(
-    skip: int = 0, limite: int = 100, session: Session = Depends(get_session)
+    session: Session,
+    skip: int = 0,
+    limite: int = 100,
 ):
     db_usuarios = session.scalars(
         select(Usuario).offset(skip).limit(limite)
@@ -54,8 +62,8 @@ def ler_usuarios(
 def atualizar_usuarios(
     user_id: int,
     usuario: UsuarioSchema,
-    session: Session = Depends(get_session),
-    usuario_atual: Usuario = Depends(pegar_usuario_atual),
+    session: Session,
+    usuario_atual: UsuarioAtual,
 ):
     if usuario_atual.id != user_id:
         raise HTTPException(
@@ -74,8 +82,8 @@ def atualizar_usuarios(
 @router.delete('/{user_id}', status_code=200, response_model=Message)
 def excluir_usuario(
     user_id: int,
-    session: Session = Depends(get_session),
-    usuario_atual: Usuario = Depends(pegar_usuario_atual),
+    session: Session,
+    usuario_atual: UsuarioAtual,
 ):
     if usuario_atual.id != user_id:
         raise HTTPException(
