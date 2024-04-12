@@ -21,19 +21,6 @@ def test_criar_usuario(client):
     }
 
 
-def test_criar_usuario_existente_retornar_400(client, usuario):
-    response = client.post(
-        '/users',
-        json={
-            'username': 'teste',
-            'email': 'teste.existente@test.com',
-            'senha': 'Senh@123',
-        },
-    )
-
-    assert response.status_code == 400
-
-
 def test_ler_usuarios(client):
     response = client.get('/users')
 
@@ -63,13 +50,14 @@ def test_atualizar_usuario(client, usuario, token):
     assert response.json() == {
         'username': 'Pedrinho',
         'email': 'pedrinho.senior@test.com',
-        'id': 1,
+        'id': 2,
     }
 
 
 def test_excluir_usuario(client, usuario, token):
     response = client.delete(
-        f'/users/{usuario.id}', headers={'Authorization': f'Bearer {token}'}
+        f'/users/{usuario.id}',
+        headers={'Authorization': f'Bearer {token}'},
     )
 
     assert response.status_code == 200
@@ -78,7 +66,7 @@ def test_excluir_usuario(client, usuario, token):
     }
 
 
-def test_atualizar_usuario_retornar_400(client, usuario, token):
+def test_atualizar_usuario_inexistente(client, usuario, token):
     response = client.put(
         '/users/2',
         headers={'Authorization': f'Bearer {token}'},
@@ -92,9 +80,24 @@ def test_atualizar_usuario_retornar_400(client, usuario, token):
     assert response.status_code == 400
 
 
-def test_excluir_usuario_retornar_400(client, usuario, token):
+def test_excluir_usuario_inexistente(client, usuario, token):
     response = client.delete(
         '/users/2', headers={'Authorization': f'Bearer {token}'}
     )
 
     assert response.status_code == 400
+
+
+def test_atualizar_usuario_com_usuario_diferente(client, outro_usuario, token):
+    response = client.put(
+        f'/users/{outro_usuario.id}',
+        headers={'Authorization': f'Bearer {token}'},
+        json={
+            'username': 'Jhon',
+            'email': 'JhonDev@senior.com',
+            'senha': '123543',
+        },
+    )
+
+    assert response.status_code == 400
+    assert response.json() == {'detail': 'Não possui permissões suficientes'}

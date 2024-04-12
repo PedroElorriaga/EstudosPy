@@ -70,6 +70,11 @@ def atualizar_usuarios(
             status_code=400, detail='Não possui permissões suficientes'
         )
 
+    db_usuario = session.scalar(select(Usuario).where(Usuario.id == user_id))
+
+    if not db_usuario:
+        raise HTTPException(status_code=400, detail='Usuário não encontrado')
+
     usuario_atual.username = usuario.username
     usuario_atual.email = usuario.email
     usuario_atual.senha = criar_hash_de_senha(usuario.senha)

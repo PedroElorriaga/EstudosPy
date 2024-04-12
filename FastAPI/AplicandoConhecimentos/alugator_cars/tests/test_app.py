@@ -15,7 +15,7 @@ def test_pegar_lista_de_carros(client):
 
 
 def test_deletar_catalogo_carros(client):
-    response = client.delete('/deletar_catalogo')
+    response = client.delete('/catalogo')
 
     assert response.json() == {'mensagem': 'Todos carros deletados'}
 
@@ -29,7 +29,7 @@ def test_tentar_pegar_lista_e_retornar_erro(client):
 
 def test_registrar_novo_carro(client):
     response = client.post(
-        '/catalogo_new',
+        '/catalogo',
         json={
             'modelo': 'GLA 250',
             'marca': 'Mercedes',
