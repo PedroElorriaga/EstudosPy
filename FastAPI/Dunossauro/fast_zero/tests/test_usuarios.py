@@ -50,7 +50,7 @@ def test_atualizar_usuario(client, usuario, token):
     assert response.json() == {
         'username': 'Pedrinho',
         'email': 'pedrinho.senior@test.com',
-        'id': 2,
+        'id': usuario.id,
     }
 
 
@@ -97,6 +97,16 @@ def test_atualizar_usuario_com_usuario_diferente(client, outro_usuario, token):
             'email': 'JhonDev@senior.com',
             'senha': '123543',
         },
+    )
+
+    assert response.status_code == 400
+    assert response.json() == {'detail': 'Não possui permissões suficientes'}
+
+
+def test_excluir_usuario_com_usuario_diferente(client, token, outro_usuario):
+    response = client.delete(
+        f'/users/{outro_usuario.id}',
+        headers={'Authorization': f'Bearer {token}'},
     )
 
     assert response.status_code == 400
