@@ -1,0 +1,13 @@
+Dia 01
+
+- Criei o ambiente virtual env-aluga
+- Instalei o poetry e setuoptools no ambiente
+- Iniciei o poetry dentro da estrutura
+- Instalei as dependencias e bibliotecas usando poetry
+- Configurei as ferramentas no arquivo .toml
+- Criei a primeira rota '/' no arquivo app.py
+- Criei o arquivo de schemas do projeto e configurei o PhonesStocks
+- Criei o arquivo databases para criar a sessão com banco de dados
+- Criei o arquivo settings para colocar as configurações do env em uma classe para ser instanciada quando preciso
+- Criei o arquivo models e inseri a informação da tabela da base de dados de Phone Stocks
+- Criei o arquivo conftest e configurei as fixtures client e session para efetuar futuros testes
