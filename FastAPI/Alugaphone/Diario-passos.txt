@@ -18,3 +18,9 @@ Dia 02
 - Criei o arquivo test_database.py para colocar os testes do banco de dados
 - Ajustei as instalações do sqlalchemy, pydantic-settings e alembic no poetry, usando o poetry add
 - Inicializei o alembic 
+
+
+Dia 03
+
+- Ajustei o migrations/env para o alembic acessar nossas configurações
+- Travei um pouco nesta configuração, pois não tinha instanciado o config na hora de passar o env

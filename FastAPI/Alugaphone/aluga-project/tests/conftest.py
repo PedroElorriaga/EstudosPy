@@ -12,7 +12,7 @@ from aluga_project.models.models import Base
 @pytest.fixture
 def session():
     engine = create_engine(
-        'sql:///:memory:',
+        'sqlite:///:memory:',
         connect_args={'check_same_thread': False},
         poolclass=StaticPool,
     )

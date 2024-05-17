@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
-from aluga_project.setting.settings import configs
+from aluga_project.setting.settings import Configs
 
-engine = create_engine(configs.DATABASE_URL)
+engine = create_engine(Configs().DATABASE_URL)
 
 
 def create_session():
