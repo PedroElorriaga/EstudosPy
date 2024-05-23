@@ -7,3 +7,7 @@ class PhonesStocks(BaseModel):
     chip: bool
     color: str
     price: float
+
+
+class PhonesList(BaseModel):
+    phones: list[PhonesStocks]

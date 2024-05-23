@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
+from aluga_project.routes import phones
+
 app = FastAPI()
+app.include_router(phones.router)
 
 
 @app.get('/', response_class=HTMLResponse)

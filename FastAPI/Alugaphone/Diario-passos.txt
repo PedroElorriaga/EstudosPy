@@ -24,3 +24,14 @@ Dia 03
 
 - Ajustei o migrations/env para o alembic acessar nossas configurações
 - Travei um pouco nesta configuração, pois não tinha instanciado o config na hora de passar o env
+- Testes funcionaram corretamente
+
+
+DIA 04
+
+- Verifiquei a database.db utilizando o sqlite3 no cmd
+- Apliquei a migração para o banco de dados utilizando o alembic, usando "alembic upgrade head"
+- Criei um get no routes/phones.py
+- Criei um novo schema que carrega uma lista do schema phonestocks
+- Inclui o router na instancia do app
+- Tentei rodar o teste do get, mas sem sucesso, me retornou somente assert status code 422
