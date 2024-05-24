@@ -35,3 +35,9 @@ DIA 04
 - Criei um novo schema que carrega uma lista do schema phonestocks
 - Inclui o router na instancia do app
 - Tentei rodar o teste do get, mas sem sucesso, me retornou somente assert status code 422
+
+
+DIA 05
+
+- Após varias tentativas, o erro estava em routes/phones, onde eu não tinha injetado as dependencias (Depends)
+- Testes funcionaram corretamente
