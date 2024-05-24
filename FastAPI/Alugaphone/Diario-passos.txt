@@ -39,5 +39,5 @@ DIA 04
 
 DIA 05
 
-- Após varias tentativas, o erro estava em routes/phones, onde eu não tinha injetado as dependencias (Depends)
+- Após varias tentativas, o erro estava em routes/phones, onde eu não tinha injetado as dependências (Depends)
 - Testes funcionaram corretamente
