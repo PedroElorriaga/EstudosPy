@@ -41,3 +41,9 @@ DIA 05
 
 - Após varias tentativas, o erro estava em routes/phones, onde eu não tinha injetado as dependências (Depends)
 - Testes funcionaram corretamente
+
+
+DIA 06
+
+- Criei a rota de post em routes/phones.py, para criar incluir o aparelho na database
+- Testes funcionaram corretamente
