@@ -25,3 +25,25 @@ def test_include_phone_to_phonestock(client):
         'color': 'Spacial Black',
         'price': 4.999,
     }
+
+
+def test_update_phone(client, phone_factory):
+    response = client.put(
+        f'/phones/{1}',
+        json={
+            'phone_model': 'Iphone 15 PRO',
+            'brand': 'Apple',
+            'chip': True,
+            'color': 'Gray',
+            'price': 7.999,
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json() == {
+        'phone_model': 'Iphone 15 PRO',
+        'brand': 'Apple',
+        'chip': True,
+        'color': 'Gray',
+        'price': 7.999,
+    }
