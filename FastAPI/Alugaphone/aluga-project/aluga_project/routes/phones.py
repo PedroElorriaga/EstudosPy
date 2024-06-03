@@ -6,14 +6,19 @@ from sqlalchemy.orm import Session
 
 from aluga_project.database.database import create_session
 from aluga_project.models.models import PhoneStock
-from aluga_project.schemas.schema import PhoneSchema, PhonesList
+from aluga_project.schemas.schema import Message, PhoneSchema, PhonesList
 
 Session = Annotated[Session, Depends(create_session)]
 
 router = APIRouter(prefix='/phones', tags=['phones'])
 
 
-@router.get('/', status_code=200, response_model=PhonesList)
+@router.get(
+    '/',
+    status_code=200,
+    response_model=PhonesList,
+    description='Coleta todos os aparelhos na base de dados, com limite pré definido em 100',
+)
 def phone_get(session: Session, skip: int = 0, limit: int = 100):
 
     phones_list_from_db = session.scalars(
@@ -23,7 +28,12 @@ def phone_get(session: Session, skip: int = 0, limit: int = 100):
     return {'phones': phones_list_from_db}
 
 
-@router.post('/', status_code=201, response_model=PhoneSchema)
+@router.post(
+    '/',
+    status_code=201,
+    response_model=Message,
+    description='Inclui um aparelho na base de dados',
+)
 def phone_post(session: Session, phone: PhoneSchema):
     phone_db = PhoneStock(
         phone_model=phone.phone_model,
@@ -37,10 +47,17 @@ def phone_post(session: Session, phone: PhoneSchema):
     session.commit()
     session.refresh(phone_db)
 
-    return phone_db
+    return {
+        'message': f'O item {phone_db.phone_model} foi incluido com sucesso!'
+    }
 
 
-@router.put('/{phone_id}', status_code=200, response_model=PhoneSchema)
+@router.put(
+    '/{phone_id}',
+    status_code=200,
+    response_model=PhoneSchema,
+    description='Atualiza o aparelho na base de dados com o ID selecionado',
+)
 def phone_put(
     session: Session,
     phone_id: int,
@@ -52,7 +69,7 @@ def phone_put(
 
     if not phone_db:
         raise HTTPException(
-            status_code=400, detail='Celular com ID informado, não existe'
+            status_code=404, detail='Celular com ID informado, não existe'
         )
 
     phone_db.phone_model = phone_update.phone_model or phone_db.phone_model
@@ -65,3 +82,25 @@ def phone_put(
     session.refresh(phone_db)
 
     return phone_db
+
+
+@router.delete(
+    '/{phone_id}',
+    status_code=200,
+    response_model=Message,
+    description='Deleta da base dados o aparelho com o ID selecionado',
+)
+def phone_del(session: Session, phone_id: int):
+    phone_db = session.scalar(
+        select(PhoneStock).where(PhoneStock.id == phone_id)
+    )
+
+    if not phone_db:
+        raise HTTPException(
+            status_code=404, detail='Celular com ID informado, não existe'
+        )
+
+    session.delete(phone_db)
+    session.commit()
+
+    return {'message': 'O item foi exlcuido com sucesso!'}

@@ -51,8 +51,16 @@ DIA 06
 
 DIA 07 
 
-- Criei a rota de put em routes/phones.py, para atualizar um aparelho existente
+- Criei a rota de put em routes/phones.py, para atualizar um aparelho existente na database
 - Instalei o factory_boy no pip e adicionei no poetry
 - Criei uma classe para configurar o factory_boy com meu modelo do models.PhoneStock
 - Criei uma fixture em conftests para criar um phone na base de dados
+- Teste funcionaram corretamente
+
+
+DIA 08
+
+- Criei a rota de delete em routes/phones.py, para deletar um aparelho existente na database
+- Criei um novo Schema chamado Message, onde carrega um json contendo uma mensagem
+- Atualizei o response_model do method post e carreguei o Message, assim como no delete
 - Teste funcionaram corretamente

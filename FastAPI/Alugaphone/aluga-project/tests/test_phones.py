@@ -19,17 +19,13 @@ def test_include_phone_to_phonestock(client):
 
     assert response.status_code == 201
     assert response.json() == {
-        'phone_model': 'Iphone 14 Pro MAX',
-        'brand': 'Apple',
-        'chip': True,
-        'color': 'Spacial Black',
-        'price': 4.999,
+        'message': 'O item Iphone 14 Pro MAX foi incluido com sucesso!'
     }
 
 
 def test_update_phone(client, phone_factory):
     response = client.put(
-        f'/phones/{1}',
+        '/phones/1',
         json={
             'phone_model': 'Iphone 15 PRO',
             'brand': 'Apple',
@@ -47,3 +43,10 @@ def test_update_phone(client, phone_factory):
         'color': 'Gray',
         'price': 7.999,
     }
+
+
+def test_delete_phone_from_db(client, phone_factory):
+    response = client.delete('/phones/1')
+
+    assert response.status_code == 200
+    assert response.json() == {'message': 'O item foi exlcuido com sucesso!'}

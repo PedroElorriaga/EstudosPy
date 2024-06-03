@@ -11,3 +11,7 @@ class PhoneSchema(BaseModel):
 
 class PhonesList(BaseModel):
     phones: list[PhoneSchema]
+
+
+class Message(BaseModel):
+    message: str
