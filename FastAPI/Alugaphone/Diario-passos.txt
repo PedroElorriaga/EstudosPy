@@ -64,3 +64,9 @@ DIA 08
 - Criei um novo Schema chamado Message, onde carrega um json contendo uma mensagem
 - Atualizei o response_model do method post e carreguei o Message, assim como no delete
 - Teste funcionaram corretamente
+
+
+DIA 09
+
+- Criei testes para todos os metohds no intuido de retornar os erros
+- Teste funcionaram corretamente

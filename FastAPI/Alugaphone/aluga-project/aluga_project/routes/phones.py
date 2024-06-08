@@ -72,11 +72,11 @@ def phone_put(
             status_code=404, detail='Celular com ID informado, não existe'
         )
 
-    phone_db.phone_model = phone_update.phone_model or phone_db.phone_model
-    phone_db.brand = phone_update.brand or phone_db.brand
-    phone_db.chip = phone_update.chip or phone_db.chip
-    phone_db.color = phone_update.color or phone_db.color
-    phone_db.price = phone_update.price or phone_db.price
+    phone_db.phone_model = phone_update.phone_model
+    phone_db.brand = phone_update.brand
+    phone_db.chip = phone_update.chip
+    phone_db.color = phone_update.color
+    phone_db.price = phone_update.price
 
     session.commit()
     session.refresh(phone_db)

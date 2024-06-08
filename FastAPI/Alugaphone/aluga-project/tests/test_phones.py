@@ -1,4 +1,4 @@
-def test_reading_datas_from_phonestock_empty(client):
+def test_get_phones_from_phonestock_empty(client):
     response = client.get('/phones')
 
     assert response.status_code == 200
@@ -23,6 +23,15 @@ def test_include_phone_to_phonestock(client):
     }
 
 
+def test_error_to_include_phone(client):
+    response = client.post(
+        '/phones',
+        json={},
+    )
+
+    assert response.status_code == 422
+
+
 def test_update_phone(client, phone_factory):
     response = client.put(
         '/phones/1',
@@ -45,8 +54,29 @@ def test_update_phone(client, phone_factory):
     }
 
 
+def test_error_update_phone(client):
+    response = client.put(
+        '/phones/1',
+        json={
+            'phone_model': 'Iphone 15 PRO',
+            'brand': 'Apple',
+            'chip': True,
+            'color': 'Gray',
+            'price': 7.999,
+        },
+    )
+
+    assert response.status_code == 404
+
+
 def test_delete_phone_from_db(client, phone_factory):
     response = client.delete('/phones/1')
 
     assert response.status_code == 200
     assert response.json() == {'message': 'O item foi exlcuido com sucesso!'}
+
+
+def test_error_delete_phone(client):
+    response = client.delete('/phones/1')
+
+    assert response.status_code == 404
