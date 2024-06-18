@@ -28,7 +28,7 @@ Dia 03
 
 
 DIA 04
-
+alembic revision --autogenerate -m "create users table"
 - Verifiquei a database.db utilizando o sqlite3 no cmd
 - Apliquei a migração para o banco de dados utilizando o alembic, usando "alembic upgrade head"
 - Criei um get no routes/phones.py
@@ -55,7 +55,7 @@ DIA 07
 - Instalei o factory_boy no pip e adicionei no poetry
 - Criei uma classe para configurar o factory_boy com meu modelo do models.PhoneStock
 - Criei uma fixture em conftests para criar um phone na base de dados
-- Teste funcionaram corretamente
+- Testes funcionaram corretamente
 
 
 DIA 08
@@ -63,10 +63,26 @@ DIA 08
 - Criei a rota de delete em routes/phones.py, para deletar um aparelho existente na database
 - Criei um novo Schema chamado Message, onde carrega um json contendo uma mensagem
 - Atualizei o response_model do method post e carreguei o Message, assim como no delete
-- Teste funcionaram corretamente
+- Testes funcionaram corretamente
 
 
 DIA 09
 
-- Criei testes para todos os metohds no intuido de retornar os erros
-- Teste funcionaram corretamente
+- Criei testes para todos os methods no intuito de retornar os erros
+- Testes funcionaram corretamente
+
+
+DIA 10
+
+- Alterei o nome de schemas/schema.py para schema/phone_schema.py
+- Criei um novo schemas/user_schema.py e uma nova rota em routes/users.py
+- Adicionei o modelo da base em models.py, para receber os users
+- Criei um method get para buscar todos os usuarios existentes 
+- Fiz criei a migração usando o alembic com o seguinte comando, alembic revision --autogenerate -m "create_users_table"
+- Fiz a atualização do schema na base de dados com o seguinte comando, alembic upgrade head
+- Inclui o router de users em app.py
+- Criei o teste para o method get de users
+- Testes funcionaram corretamente
+- Criei um user factory em conftest, para simular um usuario
+- Criei o method post em routes e criei o teste de criação de usuário na base de dados
+- Testes funcionaram corretamente

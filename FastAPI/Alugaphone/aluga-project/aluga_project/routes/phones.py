@@ -6,10 +6,9 @@ from sqlalchemy.orm import Session
 
 from aluga_project.database.database import create_session
 from aluga_project.models.models import PhoneStock
-from aluga_project.schemas.schema import Message, PhoneSchema, PhonesList
+from aluga_project.schemas.phone_schema import Message, PhoneSchema, PhonesList
 
 Session = Annotated[Session, Depends(create_session)]
-
 router = APIRouter(prefix='/phones', tags=['phones'])
 
 

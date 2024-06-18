@@ -7,7 +7,7 @@ from sqlalchemy.pool import StaticPool
 
 from aluga_project.app import app
 from aluga_project.database.database import create_session
-from aluga_project.models.models import Base, PhoneStock
+from aluga_project.models.models import Base, PhoneStock, UserModels
 
 
 @pytest.fixture
@@ -37,7 +37,7 @@ def client(session):
 
 @pytest.fixture
 def phone_factory(session):
-    phone_test = UserFactory()
+    phone_test = PhoneFactory()
 
     session.add(phone_test)
     session.commit()
@@ -46,7 +46,18 @@ def phone_factory(session):
     return phone_test
 
 
-class UserFactory(factory.Factory):
+@pytest.fixture
+def user_factory(session):
+    user_test = UserFactory()
+
+    session.add(user_test)
+    session.commit()
+    session.refresh(user_test)
+
+    return user_test
+
+
+class PhoneFactory(factory.Factory):
     class Meta:
         model = PhoneStock
 
@@ -55,3 +66,14 @@ class UserFactory(factory.Factory):
     chip = False
     color = 'Black'
     price = 2.500
+
+
+class UserFactory(factory.Factory):
+    class Meta:
+        model = UserModels
+
+    first_name = 'Jhon'
+    middle_name = 'Doe'
+    cpf = 61989645828
+    active_account = True
+    active_rent = False
