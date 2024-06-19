@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -15,3 +17,10 @@ class UsersList(BaseModel):
 
 class Message(BaseModel):
     message: str
+
+
+class UserUpdate(BaseModel):
+    first_name: Optional[str] = None
+    middle_name: Optional[str] = None
+    active_account: Optional[bool] = None
+    active_rent: Optional[bool] = None

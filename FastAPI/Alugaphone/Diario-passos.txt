@@ -86,3 +86,11 @@ DIA 10
 - Criei um user factory em conftest, para simular um usuario
 - Criei o method post em routes e criei o teste de criação de usuário na base de dados
 - Testes funcionaram corretamente
+
+
+DIA 11 
+
+- Criei um method put para atualizar os usuarios existentes
+- Criei uma nova classe um user_schema, onde carrega o schema de updates
+- Fiz um novo teste para rodar um update de um usuario existente
+- Testes funcionaram corretamente
