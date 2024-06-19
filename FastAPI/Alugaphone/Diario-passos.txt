@@ -93,4 +93,5 @@ DIA 11
 - Criei um method put para atualizar os usuarios existentes
 - Criei uma nova classe um user_schema, onde carrega o schema de updates
 - Fiz um novo teste para rodar um update de um usuario existente
+- Criado method delete para deletar usuarios existentes e testes para o mesmo
 - Testes funcionaram corretamente
