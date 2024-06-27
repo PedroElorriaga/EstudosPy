@@ -12,8 +12,8 @@ def test_post_user_to_db(client):
             'first_name': 'Pedro',
             'middle_name': 'Elorriaga',
             'cpf': 32724611837,
-            'active_account': True,
-            'active_rent': True,
+            'email': 'pedro@test.com',
+            'password': 'admin123@',
         },
     )
 

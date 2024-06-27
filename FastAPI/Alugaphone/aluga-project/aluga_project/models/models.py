@@ -25,3 +25,5 @@ class UserModels(Base):
     cpf: Mapped[int]
     active_account: Mapped[bool]
     active_rent: Mapped[bool]
+    email: Mapped[str]
+    password: Mapped[str]

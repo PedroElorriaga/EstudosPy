@@ -57,6 +57,16 @@ def user_factory(session):
     return user_test
 
 
+def user_second_factory(session):
+    user_test = UserFactory()
+
+    session.add(user_test)
+    session.commit()
+    session.refresh(user_test)
+
+    return user_test
+
+
 class PhoneFactory(factory.Factory):
     class Meta:
         model = PhoneStock
@@ -77,3 +87,5 @@ class UserFactory(factory.Factory):
     cpf = 61989645828
     active_account = True
     active_rent = False
+    email = 'jhon@test.com'
+    password = 'test'

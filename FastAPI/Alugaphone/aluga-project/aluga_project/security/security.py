@@ -1,13 +1,26 @@
-# from typing import Annotated
+from datetime import datetime, timedelta
 
-# from fastapi import Depends, HTTPException, status
-# from sqlalchemy import select
-# from sqlalchemy.orm import Session
+from jwt import encode
+from pwdlib import PasswordHash
 
-# from aluga_project.database.database import create_session
+SECRET_KEY = 'uncystvcfwqomxmxnscidopkoihj'
+ALGORITHM = 'HS256'
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+pwd_context = PasswordHash.recommended()
 
-# Session = Annotated[Session, Depends(create_session)]
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({'exp': expire})
+    encoded_jwt = encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+    return encoded_jwt
 
 
-# async def get_phone_from_db(session: Session):
-#     ...
+def make_password_hash(password: str):
+    return pwd_context.hash(password)
+
+
+def decripty_password_hash(hashed_password: str, original_password: str):
+    return pwd_context.verify(original_password, hashed_password)

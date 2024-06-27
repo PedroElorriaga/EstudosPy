@@ -12,6 +12,7 @@ from aluga_project.schemas.user_schema import (
     UsersList,
     UserUpdate,
 )
+from aluga_project.security.security import make_password_hash
 
 Session = Annotated[Session, Depends(create_session)]
 router = APIRouter(prefix='/users', tags=['users'])
@@ -42,9 +43,12 @@ def user_post(session: Session, user: UserSchema):
         first_name=user.first_name,
         middle_name=user.middle_name,
         cpf=user.cpf,
-        active_account=user.active_account,
-        active_rent=user.active_rent,
+        email=user.email,
+        password=make_password_hash(user.password),
+        active_account=True,
+        active_rent=True,
     )
+
     session.add(user_db)
     session.commit()
     session.refresh(user_db)
@@ -63,8 +67,13 @@ def user_put(id: int, session: Session, user: UserUpdate):
             status_code=400, detail=f'O ID: {id} não existe na base de dados'
         )
 
+    if user.password:
+        user.password = make_password_hash(user.password)
+
     user_from_db.first_name = user.first_name or user_from_db.first_name
     user_from_db.middle_name = user.middle_name or user_from_db.middle_name
+    user_from_db.email = user.email or user_from_db.email
+    user_from_db.password = user.password or user_from_db.password
     user_from_db.active_account = (
         user.active_account or user_from_db.active_account
     )

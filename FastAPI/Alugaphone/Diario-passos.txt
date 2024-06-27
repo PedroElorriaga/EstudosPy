@@ -78,7 +78,7 @@ DIA 10
 - Criei um novo schemas/user_schema.py e uma nova rota em routes/users.py
 - Adicionei o modelo da base em models.py, para receber os users
 - Criei um method get para buscar todos os usuarios existentes 
-- Fiz criei a migração usando o alembic com o seguinte comando, alembic revision --autogenerate -m "create_users_table"
+- Criei a migração usando o alembic com o seguinte comando, alembic revision --autogenerate -m "create_users_table"
 - Fiz a atualização do schema na base de dados com o seguinte comando, alembic upgrade head
 - Inclui o router de users em app.py
 - Criei o teste para o method get de users
@@ -95,3 +95,17 @@ DIA 11
 - Fiz um novo teste para rodar um update de um usuario existente
 - Criado method delete para deletar usuarios existentes e testes para o mesmo
 - Testes funcionaram corretamente
+
+
+DIA 12
+
+- Criei um novo user factory em conftest para executar futuros testes de segurança
+- Feito instalações de duas bibliotecas para gerar tokens JWT e criptografar senhas, poetry add pyjwt "pwdlib[argon2]"
+- Criamos o arquivo security e incluimos as bibliotecas de JWT e criptografia de senha, e configuramos a criação do token
+- Criei teste de security e testes funcionaram corretamente
+- Fiz alterações no models e migrei a alteração para o banco de dados
+- Alterei o UserSchema em user_schemas para receber o email e senha do usuario
+- Fiz alterações no teste de users no method post, aplicando a senha e email
+- Alterei o router users para receber o email e senha, e deixei um valor padrão na criação de usuarios em active_rental e active_account
+- Em security crei uma função para hashear a senha, e outra para descriptografar a senha e verificar se são iguais
+- Feito alterações em methods de routers onde uso senha, para fazer o hasheamento das senhas

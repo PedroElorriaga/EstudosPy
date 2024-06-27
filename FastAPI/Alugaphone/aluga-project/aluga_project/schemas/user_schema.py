@@ -1,14 +1,14 @@
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserSchema(BaseModel):
     first_name: str
     middle_name: str
     cpf: int
-    active_account: bool
-    active_rent: bool
+    email: EmailStr
+    password: str
 
 
 class UsersList(BaseModel):
@@ -22,5 +22,7 @@ class Message(BaseModel):
 class UserUpdate(BaseModel):
     first_name: Optional[str] = None
     middle_name: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
     active_account: Optional[bool] = None
     active_rent: Optional[bool] = None
