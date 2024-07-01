@@ -8,6 +8,7 @@ from sqlalchemy.pool import StaticPool
 from aluga_project.app import app
 from aluga_project.database.database import create_session
 from aluga_project.models.models import Base, PhoneStock, UserModels
+from aluga_project.security.security import make_password_hash
 
 
 @pytest.fixture
@@ -54,6 +55,8 @@ def user_factory(session):
     session.commit()
     session.refresh(user_test)
 
+    user_test.clean_password = 'test'  # Monkey patch
+
     return user_test
 
 
@@ -63,6 +66,8 @@ def user_second_factory(session):
     session.add(user_test)
     session.commit()
     session.refresh(user_test)
+
+    user_test.clean_password = 'test'  # Monkey patch
 
     return user_test
 
@@ -88,4 +93,4 @@ class UserFactory(factory.Factory):
     active_account = True
     active_rent = False
     email = 'jhon@test.com'
-    password = 'test'
+    password = make_password_hash('test')

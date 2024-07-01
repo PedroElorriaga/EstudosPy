@@ -22,5 +22,5 @@ def make_password_hash(password: str):
     return pwd_context.hash(password)
 
 
-def decripty_password_hash(hashed_password: str, original_password: str):
+def decripty_password_hash(original_password: str, hashed_password: str):
     return pwd_context.verify(original_password, hashed_password)

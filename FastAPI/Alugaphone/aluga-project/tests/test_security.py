@@ -11,3 +11,18 @@ def test_jwt():
 
     assert decoded['test'] == data['test']
     assert decoded['exp']
+
+
+def test_get_token(client, user_factory):
+    response = client.post(
+        '/tokens',
+        data={
+            'username': user_factory.email,
+            'password': user_factory.clean_password,
+        },
+    )
+    token = response.json()
+
+    assert response.status_code == 200
+    assert 'access_token' in token
+    assert 'token_type' in token

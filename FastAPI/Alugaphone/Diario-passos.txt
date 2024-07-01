@@ -101,11 +101,23 @@ DIA 12
 
 - Criei um novo user factory em conftest para executar futuros testes de segurança
 - Feito instalações de duas bibliotecas para gerar tokens JWT e criptografar senhas, poetry add pyjwt "pwdlib[argon2]"
-- Criamos o arquivo security e incluimos as bibliotecas de JWT e criptografia de senha, e configuramos a criação do token
+- Criamos o arquivo security, incluimos as bibliotecas de JWT e criptografia de senha, e configuramos a criação do token
 - Criei teste de security e testes funcionaram corretamente
 - Fiz alterações no models e migrei a alteração para o banco de dados
 - Alterei o UserSchema em user_schemas para receber o email e senha do usuario
 - Fiz alterações no teste de users no method post, aplicando a senha e email
-- Alterei o router users para receber o email e senha, e deixei um valor padrão na criação de usuarios em active_rental e active_account
+- Alterei o router users para receber o email e senha, e deixei um valor padrão (True) na criação de usuarios em active_rental e active_account
 - Em security crei uma função para hashear a senha, e outra para descriptografar a senha e verificar se são iguais
 - Feito alterações em methods de routers onde uso senha, para fazer o hasheamento das senhas
+- Testes funcionaram corretamente
+
+
+DIA 13
+
+- Criei schemas para token
+- Instalei um recurso para utilizar formularios de solicitação de login, poetry add python-multipart
+- Atualizei o UserFactory no conftest e inclui um hasheamento de senha
+- Criei um method post em auth.py para gerar um token quando o formulario de login for preenchido
+- Atualizei o security.py, pois havia invertido o original_password e o hashed_password na descriptografia
+- No UserFactory fizemos uma implementação de um monkey pacth, onde devemos passar a senha sem estar criptografada para fazer a verificação de senha
+- Testes funcionaram corretamente
