@@ -12,9 +12,13 @@ from aluga_project.schemas.user_schema import (
     UsersList,
     UserUpdate,
 )
-from aluga_project.security.security import make_password_hash
+from aluga_project.security.security import (
+    get_current_user,
+    make_password_hash,
+)
 
 Session = Annotated[Session, Depends(create_session)]
+Current_user = Annotated[UserModels, Depends(get_current_user)]
 router = APIRouter(prefix='/users', tags=['users'])
 
 
@@ -57,7 +61,14 @@ def user_post(session: Session, user: UserSchema):
 
 
 @router.put('/{id}', status_code=200, response_model=Message)
-def user_put(id: int, session: Session, user: UserUpdate):
+def user_put(
+    id: int, session: Session, user: UserUpdate, current_user: Current_user
+):
+    if current_user.id != id:
+        raise HTTPException(
+            status_code=400, detail='Sem permissões sulficientes'
+        )
+
     user_from_db = session.scalar(
         select(UserModels).where(id == UserModels.id)
     )
@@ -86,7 +97,12 @@ def user_put(id: int, session: Session, user: UserUpdate):
 
 
 @router.delete('/{id}', status_code=200, response_model=Message)
-def user_delete(id: int, session: Session):
+def user_delete(id: int, session: Session, current_user: Current_user):
+    if current_user.id != id:
+        raise HTTPException(
+            status_code=400, detail='Sem permissões sulficientes'
+        )
+
     user_from_db = session.scalar(
         select(UserModels).where(id == UserModels.id)
     )

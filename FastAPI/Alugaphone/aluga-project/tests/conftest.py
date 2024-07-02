@@ -60,6 +60,7 @@ def user_factory(session):
     return user_test
 
 
+@pytest.fixture
 def user_second_factory(session):
     user_test = UserFactory()
 
@@ -70,6 +71,19 @@ def user_second_factory(session):
     user_test.clean_password = 'test'  # Monkey patch
 
     return user_test
+
+
+@pytest.fixture
+def token(client, user_factory):
+    response = client.post(
+        '/tokens',
+        data={
+            'username': user_factory.email,
+            'password': user_factory.clean_password,
+        },
+    )
+
+    return response.json()['access_token']
 
 
 class PhoneFactory(factory.Factory):

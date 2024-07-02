@@ -34,6 +34,6 @@ def token_post(session: Session, form_data: FormData):
             status_code=400, detail='Email ou senha incorreto(s)'
         )
 
-    access_token = create_access_token(data={'sub': user_from_db.email})
+    access_token = create_access_token({'sub': user_from_db.email})
 
     return {'access_token': access_token, 'token_type': 'bearer'}

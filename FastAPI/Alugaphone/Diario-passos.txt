@@ -115,9 +115,20 @@ DIA 12
 DIA 13
 
 - Criei schemas para token
-- Instalei um recurso para utilizar formularios de solicitação de login, poetry add python-multipart
+- Instalei um recurso para utilizar formularios de solicitação de login (OAuth2PasswordRequestForm), poetry add python-multipart
 - Atualizei o UserFactory no conftest e inclui um hasheamento de senha
 - Criei um method post em auth.py para gerar um token quando o formulario de login for preenchido
 - Atualizei o security.py, pois havia invertido o original_password e o hashed_password na descriptografia
 - No UserFactory fizemos uma implementação de um monkey pacth, onde devemos passar a senha sem estar criptografada para fazer a verificação de senha
+- Testes funcionaram corretamente
+
+
+DIA 14
+
+- Fiz uma alteração no UserUpdate no schemas.py onde retirei o uso do Optional, e usei o recurso de barra (|) para declarar que o campo é opcional
+- Criei um novo TokenData em token_schema.py onde ira receber o Username/email quando verificarmos o usuário
+- Em security.py fiz uma função para decodificar o token jwt do header e coleta as informações do usuario atualizar
+- Atualizei o router de users.py para receber a verificação de token
+- Criei uma fixture para pegar o token no user_factory
+- Atualizamos os testes de update e delete no users, adicionando header para carregar o token
 - Testes funcionaram corretamente

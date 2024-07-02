@@ -21,9 +21,10 @@ def test_post_user_to_db(client):
     assert response.json() == {'message': 'Usuário cadastrado com sucesso!'}
 
 
-def test_update_user_from_db(client, user_factory):
+def test_update_user_from_db(client, user_factory, token):
     response = client.put(
         '/users/1',
+        headers={'Authorization': f'Bearer {token}'},
         json={
             'first_name': 'Pedro',
             'middle_name': 'Elorriaga',
@@ -36,8 +37,11 @@ def test_update_user_from_db(client, user_factory):
     }
 
 
-def test_delete_user_from_db(client, user_factory):
-    response = client.delete('/users/1')
+def test_delete_user_from_db(client, user_factory, token):
+    response = client.delete(
+        '/users/1',
+        headers={'Authorization': f'Bearer {token}'},
+    )
 
     assert response.status_code == 200
     assert response.json() == {
