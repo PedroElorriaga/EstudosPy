@@ -132,3 +132,11 @@ DIA 14
 - Criei uma fixture para pegar o token no user_factory
 - Atualizamos os testes de update e delete no users, adicionando header para carregar o token
 - Testes funcionaram corretamente
+
+
+DIA 15
+
+- Criei um teste em test_security.py, onde testa um codigo invalido e retorna o erro de nao ser valido
+- Criei um schema em user_schema.py, para ser exibido sem a senha mas com o ID quando buscarmos na base de dados
+- Alterei a rota que antes estava com o nome "/tokens" para "/token", no intuito de o formulario funcionar corretamente
+- Alterei as configurações de security, onde passei informações como SECRET_KEY para o .env, alterando em todo codigo onde usei essas constantes

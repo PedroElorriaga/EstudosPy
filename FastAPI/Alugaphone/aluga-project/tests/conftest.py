@@ -76,7 +76,7 @@ def user_second_factory(session):
 @pytest.fixture
 def token(client, user_factory):
     response = client.post(
-        '/tokens',
+        '/token',
         data={
             'username': user_factory.email,
             'password': user_factory.clean_password,

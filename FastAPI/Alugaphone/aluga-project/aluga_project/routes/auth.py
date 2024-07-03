@@ -15,7 +15,7 @@ from aluga_project.security.security import (
 
 Session = Annotated[Session, Depends(create_session)]
 FormData = Annotated[OAuth2PasswordRequestForm, Depends()]
-router = APIRouter(prefix='/tokens', tags=['tokens'])
+router = APIRouter(prefix='/token', tags=['token'])
 
 
 @router.post('/', status_code=200, response_model=TokenSchema)

@@ -9,8 +9,16 @@ class UserSchema(BaseModel):
     password: str
 
 
+class UserPublic(BaseModel):
+    id: int
+    first_name: str
+    middle_name: str
+    cpf: int
+    email: EmailStr
+
+
 class UsersList(BaseModel):
-    users: list[UserSchema]
+    users: list[UserPublic]
 
 
 class Message(BaseModel):

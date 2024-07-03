@@ -11,21 +11,23 @@ from sqlalchemy.orm import Session
 from aluga_project.database.database import create_session
 from aluga_project.models.models import UserModels
 from aluga_project.schemas.token_schema import TokenData
+from aluga_project.setting.settings import Configs
 
 Session = Annotated[Session, Depends(create_session)]
 oauth2_token = Annotated[OAuth2PasswordBearer(tokenUrl='token'), Depends()]
 
-SECRET_KEY = 'uncystvcfwqomxmxnscidopkoihj'
-ALGORITHM = 'HS256'
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
 pwd_context = PasswordHash.recommended()
 
 
 def create_access_token(data: dict):
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.utcnow() + timedelta(
+        minutes=Configs().ACCESS_TOKEN_EXPIRE_MINUTES
+    )
     to_encode.update({'exp': expire})
-    encoded_jwt = encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = encode(
+        to_encode, Configs().SECRET_KEY, algorithm=Configs().ALGORITHM
+    )
 
     return encoded_jwt
 
@@ -46,7 +48,9 @@ async def get_current_user(session: Session, token: oauth2_token):
     )
 
     try:
-        payload = decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = decode(
+            token, Configs().SECRET_KEY, algorithms=[Configs().ALGORITHM]
+        )
         username: str = payload.get('sub')
         if not username:
             raise credentials_error

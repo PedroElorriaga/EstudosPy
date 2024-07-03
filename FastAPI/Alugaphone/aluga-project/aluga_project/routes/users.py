@@ -66,7 +66,7 @@ def user_put(
 ):
     if current_user.id != id:
         raise HTTPException(
-            status_code=400, detail='Sem permissões sulficientes'
+            status_code=400, detail='Sem permissões suficientes'
         )
 
     user_from_db = session.scalar(
