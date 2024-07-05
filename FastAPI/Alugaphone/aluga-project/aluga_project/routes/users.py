@@ -64,11 +64,6 @@ def user_post(session: Session, user: UserSchema):
 def user_put(
     id: int, session: Session, user: UserUpdate, current_user: Current_user
 ):
-    if current_user.id != id:
-        raise HTTPException(
-            status_code=400, detail='Sem permissões suficientes'
-        )
-
     user_from_db = session.scalar(
         select(UserModels).where(id == UserModels.id)
     )
@@ -76,6 +71,11 @@ def user_put(
     if not user_from_db:
         raise HTTPException(
             status_code=400, detail=f'O ID: {id} não existe na base de dados'
+        )
+
+    if current_user.id != user_from_db.id:
+        raise HTTPException(
+            status_code=400, detail='Sem permissões suficientes'
         )
 
     if user.password:
@@ -98,11 +98,6 @@ def user_put(
 
 @router.delete('/{id}', status_code=200, response_model=Message)
 def user_delete(id: int, session: Session, current_user: Current_user):
-    if current_user.id != id:
-        raise HTTPException(
-            status_code=400, detail='Sem permissões sulficientes'
-        )
-
     user_from_db = session.scalar(
         select(UserModels).where(id == UserModels.id)
     )
@@ -110,6 +105,11 @@ def user_delete(id: int, session: Session, current_user: Current_user):
     if not user_from_db:
         raise HTTPException(
             status_code=400, detail=f'O ID: {id} não existe na base de dados'
+        )
+
+    if current_user.id != user_from_db.id:
+        raise HTTPException(
+            status_code=400, detail='Sem permissões suficientes'
         )
 
     session.delete(user_from_db)

@@ -63,6 +63,7 @@ def user_factory(session):
 @pytest.fixture
 def user_second_factory(session):
     user_test = UserFactory()
+    user_test.cpf = 61989645800
 
     session.add(user_test)
     session.commit()

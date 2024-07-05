@@ -136,7 +136,15 @@ DIA 14
 
 DIA 15
 
-- Criei um teste em test_security.py, onde testa um codigo invalido e retorna o erro de nao ser valido
+- Criei um teste em test_security.py, onde testa um token invalido e retorna o erro de nao ser valido
 - Criei um schema em user_schema.py, para ser exibido sem a senha mas com o ID quando buscarmos na base de dados
 - Alterei a rota que antes estava com o nome "/tokens" para "/token", no intuito de o formulario funcionar corretamente
-- Alterei as configurações de security, onde passei informações como SECRET_KEY para o .env, alterando em todo codigo onde usei essas constantes
+- Alterei as configurações de security, onde passei informações como SECRET_KEY para o .env, alterando em todo codigo onde usei essas constantes 
+
+
+DIA 16
+
+- Criei testes para possiveis erros nas routes de users
+- Atualizei o second_user_factory, para mudar o cpf quando for criado, para ter cpfs unicos
+- Alterei a sequencia de verificacoes em users.py, para primeiro tentar buscar o usuario na base de dados e depois verificar o token
+- Teste funcionaram corretamente
