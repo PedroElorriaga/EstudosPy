@@ -1,3 +1,4 @@
+from freezegun import freeze_time
 from jwt import decode
 
 from aluga_project.security.security import create_access_token
@@ -40,3 +41,55 @@ def test_jwt_invalid(client):
     assert response.json() == {
         'detail': 'Sua credencial não pode ser verificada'
     }
+
+
+def test_expire_time_token(client, user_factory):
+    with freeze_time('2024-07-08 10:00:00'):
+        response = client.post(
+            '/token',
+            data={
+                'username': user_factory.email,
+                'password': user_factory.clean_password,
+            },
+        )
+
+        assert response.status_code == 200
+        token = response.json()['access_token']
+
+    with freeze_time('2024-07-08 10:31:00'):
+        response = client.put(
+            '/users/1',
+            headers={'Authorization': f'Bearer {token}'},
+            json={
+                'username': 'wrongwrong',
+                'email': 'wrong@wrong.com',
+            },
+        )
+
+        assert response.status_code == 401
+        assert response.json() == {
+            'detail': 'Sua credencial não pode ser verificada'
+        }
+
+
+def test_login_with_wrong_password(client, user_factory):
+    response = client.post(
+        '/token',
+        data={'username': user_factory.email, 'password': 'wrongpass'},
+    )
+
+    assert response.status_code == 400
+    assert response.json() == {'detail': 'Email ou senha incorreto(s)'}
+
+
+def test_login_with_wrong_username(client, user_factory):
+    response = client.post(
+        '/token',
+        data={
+            'username': 'wronguser@test.com',
+            'password': user_factory.clean_password,
+        },
+    )
+
+    assert response.status_code == 400
+    assert response.json() == {'detail': 'Email ou senha incorreto(s)'}

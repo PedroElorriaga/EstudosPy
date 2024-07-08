@@ -148,3 +148,13 @@ DIA 16
 - Atualizei o second_user_factory, para mudar o cpf quando for criado, para ter cpfs unicos
 - Alterei a sequencia de verificacoes em users.py, para primeiro tentar buscar o usuario na base de dados e depois verificar o token
 - Teste funcionaram corretamente
+
+
+DIA 17
+
+- Instalamos a biblioteca freezegun, onde podemos congelar o tempo em um ponto especifico e testar o token - poetry add --group dev freezegun
+- Fiz um ajuste em security.py, adicionando e exception de SignatureError, para chamar o erro de credencial quando preciso
+- Criei o teste de tempo expirado em test_security.py, onde avançamos o tempo com o freezegun e verificamos a expiração do token
+- Teste funcionou de forma correta
+- Criado testes de verificação de erros de senha e email incorretos
+- Testes funcionaram corretamente
