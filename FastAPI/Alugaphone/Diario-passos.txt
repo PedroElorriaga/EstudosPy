@@ -155,6 +155,12 @@ DIA 17
 - Instalamos a biblioteca freezegun, onde podemos congelar o tempo em um ponto especifico e testar o token - poetry add --group dev freezegun
 - Fiz um ajuste em security.py, adicionando e exception de SignatureError, para chamar o erro de credencial quando preciso
 - Criei o teste de tempo expirado em test_security.py, onde avançamos o tempo com o freezegun e verificamos a expiração do token
-- Teste funcionou de forma correta
 - Criado testes de verificação de erros de senha e email incorretos
+- Testes funcionaram corretamente
+
+
+DIA 18
+
+- Incui o Current_user em rotas de put, post e delete de phones, para ter a necessidade de autenticação quando for executado algo nessa rotas
+- Atualizei os testes, incluindo os tokens para serem realizados como antes
 - Testes funcionaram corretamente

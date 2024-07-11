@@ -5,9 +5,10 @@ def test_get_phones_from_phonestock_empty(client):
     assert response.json() == {'phones': []}
 
 
-def test_include_phone_to_phonestock(client):
+def test_include_phone_to_phonestock(client, token):
     response = client.post(
         '/phones',
+        headers={'Authorization': f'Bearer {token}'},
         json={
             'phone_model': 'Iphone 14 Pro MAX',
             'brand': 'Apple',
@@ -23,18 +24,20 @@ def test_include_phone_to_phonestock(client):
     }
 
 
-def test_error_to_include_phone(client):
+def test_error_to_include_phone(client, token):
     response = client.post(
         '/phones',
+        headers={'Authorization': f'Bearer {token}'},
         json={},
     )
 
     assert response.status_code == 422
 
 
-def test_update_phone(client, phone_factory):
+def test_update_phone(client, phone_factory, token):
     response = client.put(
         '/phones/1',
+        headers={'Authorization': f'Bearer {token}'},
         json={
             'phone_model': 'Iphone 15 PRO',
             'brand': 'Apple',
@@ -54,9 +57,10 @@ def test_update_phone(client, phone_factory):
     }
 
 
-def test_error_update_phone(client):
+def test_error_update_phone(client, token):
     response = client.put(
         '/phones/1',
+        headers={'Authorization': f'Bearer {token}'},
         json={
             'phone_model': 'Iphone 15 PRO',
             'brand': 'Apple',
@@ -69,14 +73,20 @@ def test_error_update_phone(client):
     assert response.status_code == 404
 
 
-def test_delete_phone_from_db(client, phone_factory):
-    response = client.delete('/phones/1')
+def test_delete_phone_from_db(client, phone_factory, token):
+    response = client.delete(
+        '/phones/1',
+        headers={'Authorization': f'Bearer {token}'},
+    )
 
     assert response.status_code == 200
     assert response.json() == {'message': 'O item foi exlcuido com sucesso!'}
 
 
-def test_error_delete_phone(client):
-    response = client.delete('/phones/1')
+def test_error_delete_phone(client, token):
+    response = client.delete(
+        '/phones/1',
+        headers={'Authorization': f'Bearer {token}'},
+    )
 
     assert response.status_code == 404
