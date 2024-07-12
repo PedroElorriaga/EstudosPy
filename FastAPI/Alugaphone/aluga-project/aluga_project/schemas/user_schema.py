@@ -30,5 +30,5 @@ class UserUpdate(BaseModel):
     middle_name: str | None = None
     email: str | None = None
     password: str | None = None
-    active_account: str | None = None
-    active_rent: str | None = None
+    active_account: bool | None = None
+    active_rent: bool | None = None
