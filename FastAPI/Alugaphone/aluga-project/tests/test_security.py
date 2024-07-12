@@ -72,6 +72,31 @@ def test_expire_time_token(client, user_factory):
         }
 
 
+def test_expire_time_token_dont_refresh(client, user_factory):
+    with freeze_time('2024-07-08 10:00:00'):
+        response = client.post(
+            '/token',
+            data={
+                'username': user_factory.email,
+                'password': user_factory.clean_password,
+            },
+        )
+
+        assert response.status_code == 200
+        token = response.json()['access_token']
+
+    with freeze_time('2024-07-08 10:31:00'):
+        response = client.put(
+            '/users/refresh_token',
+            headers={'Authorization': f'Bearer {token}'},
+        )
+
+        assert response.status_code == 401
+        assert response.json() == {
+            'detail': 'Suas credenciais não puderam ser verificadas'
+        }
+
+
 def test_login_with_wrong_password(client, user_factory):
     response = client.post(
         '/token',
@@ -93,3 +118,16 @@ def test_login_with_wrong_username(client, user_factory):
 
     assert response.status_code == 400
     assert response.json() == {'detail': 'Email ou senha incorreto(s)'}
+
+
+def test_refresh_token(client, user_factory, token):
+    response = client.post(
+        '/token/refresh_token', headers={'Authorization': f'Bearer {token}'}
+    )
+
+    data = response.json()
+
+    assert response.status_code == 200
+    assert 'access_token' in data
+    assert 'token_type' in data
+    assert data['token_type'] == 'bearer'

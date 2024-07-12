@@ -11,10 +11,12 @@ from aluga_project.schemas.token_schema import TokenSchema
 from aluga_project.security.security import (
     create_access_token,
     decripty_password_hash,
+    get_current_user,
 )
 
 Session = Annotated[Session, Depends(create_session)]
 FormData = Annotated[OAuth2PasswordRequestForm, Depends()]
+Current_user = Annotated[UserModels, Depends(get_current_user)]
 router = APIRouter(prefix='/token', tags=['token'])
 
 
@@ -37,3 +39,10 @@ def token_post(session: Session, form_data: FormData):
     access_token = create_access_token({'sub': user_from_db.email})
 
     return {'access_token': access_token, 'token_type': 'bearer'}
+
+
+@router.post('/refresh_token', response_model=TokenSchema)
+def refresh_token_post(current_user: Current_user):
+    new_access_token = create_access_token({'sub': current_user.email})
+
+    return {'access_token': new_access_token, 'token_type': 'bearer'}
