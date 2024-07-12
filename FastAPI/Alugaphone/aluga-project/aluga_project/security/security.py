@@ -43,7 +43,7 @@ def decripty_password_hash(original_password: str, hashed_password: str):
 async def get_current_user(session: Session, token: oauth2_token):
     credentials_error = HTTPException(
         status_code=401,
-        detail='Sua credencial não pode ser verificada',
+        detail='Suas credenciais não puderam ser verificadas',
         headers={'WWW-Authenticate': 'Bearer'},
     )
 

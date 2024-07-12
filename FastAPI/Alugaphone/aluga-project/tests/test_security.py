@@ -39,7 +39,7 @@ def test_jwt_invalid(client):
 
     assert response.status_code == 401
     assert response.json() == {
-        'detail': 'Sua credencial não pode ser verificada'
+        'detail': 'Suas credenciais não puderam ser verificadas'
     }
 
 
@@ -68,7 +68,7 @@ def test_expire_time_token(client, user_factory):
 
         assert response.status_code == 401
         assert response.json() == {
-            'detail': 'Sua credencial não pode ser verificada'
+            'detail': 'Suas credenciais não puderam ser verificadas'
         }
 
 
