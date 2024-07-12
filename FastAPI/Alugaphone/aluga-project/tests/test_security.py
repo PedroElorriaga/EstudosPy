@@ -86,8 +86,8 @@ def test_expire_time_token_dont_refresh(client, user_factory):
         token = response.json()['access_token']
 
     with freeze_time('2024-07-08 10:31:00'):
-        response = client.put(
-            '/users/refresh_token',
+        response = client.post(
+            '/token/refresh_token',
             headers={'Authorization': f'Bearer {token}'},
         )
 
