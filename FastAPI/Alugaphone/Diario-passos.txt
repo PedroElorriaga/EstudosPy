@@ -171,3 +171,11 @@ DIA 19
 - Criei um novo post em auth.py com complemento na rota /refresh_token, para fazer a renovação do token
 - Criei dois novos testes para testar o recurso
 - Testes funcionaram corretamente
+
+
+DIA 20
+
+- Ajustei algumas coisas no token, que irei detalhar
+- Ajustei primeiro em auth.py na rota post em token_post, o sub que enviamos para o payload antes mandavamos com o email, agora enviamos o ID da base de dados em tipo de str
+- Atualizamos tambem em auth.py a rota do refresh_token_post, o sub para ID em forma de str tambem
+- Ajustamos o security.py em get_current_token, para buscar na base de dados pelo ID

@@ -36,13 +36,13 @@ def token_post(session: Session, form_data: FormData):
             status_code=400, detail='Email ou senha incorreto(s)'
         )
 
-    access_token = create_access_token({'sub': user_from_db.email})
+    access_token = create_access_token({'sub': str(user_from_db.id)})
 
     return {'access_token': access_token, 'token_type': 'bearer'}
 
 
 @router.post('/refresh_token', response_model=TokenSchema)
 def refresh_token_post(current_user: Current_user):
-    new_access_token = create_access_token({'sub': current_user.email})
+    new_access_token = create_access_token({'sub': str(current_user.id)})
 
     return {'access_token': new_access_token, 'token_type': 'bearer'}
