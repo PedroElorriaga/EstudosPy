@@ -179,3 +179,10 @@ DIA 20
 - Ajustei primeiro em auth.py na rota post em token_post, o sub que enviamos para o payload antes mandavamos com o email, agora enviamos o ID da base de dados em tipo de str
 - Atualizamos tambem em auth.py a rota do refresh_token_post, o sub para ID em forma de str tambem
 - Ajustamos o security.py em get_current_token, para buscar na base de dados pelo ID
+
+
+DIA 21
+
+- Fiz a instalação do Docker e do WSL
+- Iniciei as configurações do Docker
+- Primeiro configuramos o arquivo Dockerfile que criamos no projeto, depois criaremos a imagem com as configurações definidas, -> (docker build -t 'tag_imagem' .)
