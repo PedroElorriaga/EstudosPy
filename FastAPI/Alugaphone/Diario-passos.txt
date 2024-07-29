@@ -178,7 +178,7 @@ DIA 20
 - Ajustei algumas coisas no token, que irei detalhar
 - Ajustei primeiro em auth.py na rota post em token_post, o sub que enviamos para o payload antes mandavamos com o email, agora enviamos o ID da base de dados em tipo de str
 - Atualizamos tambem em auth.py a rota do refresh_token_post, o sub para ID em forma de str tambem
-- Ajustamos o security.py em get_current_token, para buscar na base de dados pelo ID
+- Ajustei o security.py em get_current_token, para buscar na base de dados pelo ID
 
 
 DIA 21
@@ -186,3 +186,15 @@ DIA 21
 - Fiz a instalação do Docker e do WSL
 - Iniciei as configurações do Docker
 - Primeiro configuramos o arquivo Dockerfile que criamos no projeto, depois criaremos a imagem com as configurações definidas, -> (docker build -t 'tag_imagem' .)
+
+
+DIA 22
+
+- Fiz a execução da imagem do postgres utilizando docker
+- Instalei o psycopg, para que o sqlalchemy suporte o postgresql
+- No arquivo .env, alterei o database url direcionando para o contanier que criamos no docker
+- Após essas configurações, agora migrei o banco de dados para um ambiente de contanei, -> (docker exec -it nome_contanier poetry run alembic upgrade head)
+- Fiz o download do Dbeaver para ver se a estrutura foi migrada de forma correta para o banco de dados postgresql
+- Criei um arquivo compose.yaml, contendo informações que permite definir e gerenciar aplicativos multi-contêiner com Docker
+- Ativo o compose com o comando docker-compose up e desativo com o docker-compose down
+
