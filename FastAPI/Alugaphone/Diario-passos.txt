@@ -198,3 +198,9 @@ DIA 22
 - Criei um arquivo compose.yaml, contendo informações que permite definir e gerenciar aplicativos multi-contêiner com Docker
 - Ativo o compose com o comando docker-compose up e desativo com o docker-compose down
 
+
+DIA 23
+
+- Criei um arquivo entrypoint.sh que funciona como um executavel que é executado antes da aplicação rodar
+- Adicionei uma biblioteca chamada psycopg2-binary, que faz a migração do sqlalchemy para postgresql
+- Adicionamos o entrypoint no docker compose, e executamos o docker-compose up --build para aplicar as alterações no arquivo compose
