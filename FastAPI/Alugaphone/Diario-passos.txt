@@ -201,6 +201,13 @@ DIA 22
 
 DIA 23
 
-- Criei um arquivo entrypoint.sh que funciona como um executavel que é executado antes da aplicação rodar
+- Criei um arquivo entrypoint.sh que funciona como um executavel que é executado antes da aplicação rodar, para rodar as migrações do banco de dados
 - Adicionei uma biblioteca chamada psycopg2-binary, que faz a migração do sqlalchemy para postgresql
 - Adicionamos o entrypoint no docker compose, e executamos o docker-compose up --build para aplicar as alterações no arquivo compose
+
+
+DIA 24
+
+- Adicionei um argumento nas configurações do pydantic em settings.py, extra='ignore'
+- Mudamos o conftests na função session, onde usamos agora a engine do banco de postgres
+- Alterei o arquivo models.py para utilizar table_registry

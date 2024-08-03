@@ -1,14 +1,13 @@
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, registry
+
+table_registry = registry()
 
 
-class Base(DeclarativeBase):
-    pass
-
-
-class PhoneStock(Base):
+@table_registry.mapped_as_dataclass
+class PhoneStock:
     __tablename__ = 'PhoneStock'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(init=False, primary_key=True)
     phone_model: Mapped[str]
     brand: Mapped[str]
     chip: Mapped[bool]
@@ -16,10 +15,11 @@ class PhoneStock(Base):
     price: Mapped[float]
 
 
-class UserModels(Base):
+@table_registry.mapped_as_dataclass
+class UserModels:
     __tablename__ = 'Users'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(init=False, primary_key=True)
     first_name: Mapped[str]
     middle_name: Mapped[str]
     cpf: Mapped[int]

@@ -1,0 +1,31 @@
+services:
+  aluga_database:
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_DB: aluga_db
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -h localhost -d aluga_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+  aluga_container:
+    image: aluga_image
+    entrypoint: ./entrypoint.sh
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      aluga_database:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://admin:admin@aluga_database:5432/aluga_db
+
+volumes:
+  pgdata:

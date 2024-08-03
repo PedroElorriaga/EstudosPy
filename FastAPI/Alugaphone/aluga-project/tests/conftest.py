@@ -2,26 +2,26 @@ import factory
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
+from sqlalchemy.orm import Session
+from testcontainers.postgres import PostgresContainer
 
 from aluga_project.app import app
 from aluga_project.database.database import create_session
-from aluga_project.models.models import Base, PhoneStock, UserModels
+from aluga_project.models.models import PhoneStock, UserModels, table_registry
 from aluga_project.security.security import make_password_hash
 
 
 @pytest.fixture
 def session():
-    engine = create_engine(
-        'sqlite:///:memory:',
-        connect_args={'check_same_thread': False},
-        poolclass=StaticPool,
-    )
-    Session = sessionmaker(bind=engine)
-    Base.metadata.create_all(engine)
-    yield Session()
-    Base.metadata.drop_all(engine)
+    with PostgresContainer('postgres:16', driver='psycopg') as postgres:
+        engine = create_engine(postgres.get_connection_url())
+        table_registry.metadata.create_all(engine)
+
+        with Session(engine) as session:
+            yield session
+            session.rollback()
+
+        table_registry.metadata.drop_all(engine)
 
 
 @pytest.fixture
