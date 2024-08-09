@@ -211,3 +211,13 @@ DIA 24
 - Adicionei um argumento nas configurações do pydantic em settings.py, extra='ignore'
 - Mudamos o conftests na função session, onde usamos agora a engine do banco de postgres
 - Alterei o arquivo models.py para utilizar table_registry
+
+
+DIA 25
+
+- Arrumei os testes que estavam dando problemas, segue os passos
+- Primeiro fui em models.py e alterei o tipo do dado de CPF para string
+- Em conftest.py mudei o tipo enviado do CPF para string tambem
+- Em security.py declarei na hora da busca na base de dados, que a variavel token_data.username deve ser int, pois o SQL server só aceita comparações do mesmo tipo
+- Ajustei todos os CPF nos testes para enviar no tipo de string
+- Por ultimo alterei os tipos de cpf para string em user_schema.py
