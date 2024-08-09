@@ -193,7 +193,7 @@ DIA 22
 - Fiz a execução da imagem do postgres utilizando docker
 - Instalei o psycopg, para que o sqlalchemy suporte o postgresql
 - No arquivo .env, alterei o database url direcionando para o contanier que criamos no docker
-- Após essas configurações, agora migrei o banco de dados para um ambiente de contanei, -> (docker exec -it nome_contanier poetry run alembic upgrade head)
+- Após essas configurações, agora migrei o banco de dados para um ambiente de contanier, -> (docker exec -it nome_contanier poetry run alembic upgrade head)
 - Fiz o download do Dbeaver para ver se a estrutura foi migrada de forma correta para o banco de dados postgresql
 - Criei um arquivo compose.yaml, contendo informações que permite definir e gerenciar aplicativos multi-contêiner com Docker
 - Ativo o compose com o comando docker-compose up e desativo com o docker-compose down

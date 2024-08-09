@@ -104,7 +104,7 @@ class UserFactory(factory.Factory):
 
     first_name = 'Jhon'
     middle_name = 'Doe'
-    cpf = 61989645828
+    cpf = '61989645828'
     active_account = True
     active_rent = False
     email = 'jhon@test.com'

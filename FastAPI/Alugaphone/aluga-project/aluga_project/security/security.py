@@ -61,7 +61,7 @@ async def get_current_user(session: Session, token: oauth2_token):
         raise credentials_error
 
     user_from_db = session.scalar(
-        select(UserModels).where(token_data.username == UserModels.id)
+        select(UserModels).where(int(token_data.username) == UserModels.id)
     )
 
     if not user_from_db:

@@ -11,7 +11,7 @@ def test_post_user_to_db(client):
         json={
             'first_name': 'Pedro',
             'middle_name': 'Elorriaga',
-            'cpf': 32724611837,
+            'cpf': '32724611837',
             'email': 'pedro@test.com',
             'password': 'admin123@',
         },
@@ -27,7 +27,7 @@ def test_post_existing_cpf_user(client, user_factory):
         json={
             'first_name': 'Pedro',
             'middle_name': 'Elorriaga',
-            'cpf': 61989645828,
+            'cpf': '61989645828',
             'email': 'pedro@test.com',
             'password': 'admin123@',
         },

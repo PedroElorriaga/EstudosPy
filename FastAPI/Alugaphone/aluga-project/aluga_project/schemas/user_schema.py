@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr
 class UserSchema(BaseModel):
     first_name: str
     middle_name: str
-    cpf: int
+    cpf: str
     email: EmailStr
     password: str
 
@@ -13,7 +13,7 @@ class UserPublic(BaseModel):
     id: int
     first_name: str
     middle_name: str
-    cpf: int
+    cpf: str
     email: EmailStr
 
 

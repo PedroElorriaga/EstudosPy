@@ -1,6 +1,10 @@
-from sqlalchemy.orm import Mapped, mapped_column, registry
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, registry
 
 table_registry = registry()
+
+
+class Base(DeclarativeBase):
+    pass
 
 
 @table_registry.mapped_as_dataclass
@@ -22,7 +26,7 @@ class UserModels:
     id: Mapped[int] = mapped_column(init=False, primary_key=True)
     first_name: Mapped[str]
     middle_name: Mapped[str]
-    cpf: Mapped[int]
+    cpf: Mapped[str]
     active_account: Mapped[bool]
     active_rent: Mapped[bool]
     email: Mapped[str]
