@@ -185,12 +185,12 @@ DIA 21
 
 - Fiz a instalação do Docker e do WSL
 - Iniciei as configurações do Docker
-- Primeiro configuramos o arquivo Dockerfile que criamos no projeto, depois criaremos a imagem com as configurações definidas, -> (docker build -t 'tag_imagem' .)
+- Primeiro configuramos o arquivo Dockerfile que criamos no projeto, depois criaremos a imagem com as configurações definidas, -> (docker build -t 'nome_imagem' .)
 
 
 DIA 22
 
-- Fiz a execução da imagem do postgres utilizando docker
+- Fiz o build da imagem do postgres utilizando docker, -> (docker run --name aluga_database -e POSTGRES_USER=admin -e POSTGRES_DB=aluga_db -e POSTGRES_PASSWORD=admin -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres)
 - Instalei o psycopg, para que o sqlalchemy suporte o postgresql
 - No arquivo .env, alterei o database url direcionando para o contanier que criamos no docker
 - Após essas configurações, agora migrei o banco de dados para um ambiente de contanier, -> (docker exec -it nome_contanier poetry run alembic upgrade head)
