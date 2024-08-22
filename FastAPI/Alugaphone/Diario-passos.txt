@@ -215,9 +215,20 @@ DIA 24
 
 DIA 25
 
+- Instalei no poetry um pacote para utilizar containers em pacotes, (poetry add --group dev testcontainers)
+- Alterei a fixture de session que é usada no testes em conftest.py
 - Arrumei os testes que estavam dando problemas, segue os passos
 - Primeiro fui em models.py e alterei o tipo do dado de CPF para string
 - Em conftest.py mudei o tipo enviado do CPF para string tambem
 - Em security.py declarei na hora da busca na base de dados, que a variavel token_data.username deve ser int, pois o SQL server só aceita comparações do mesmo tipo
 - Ajustei todos os CPF nos testes para enviar no tipo de string
 - Por ultimo alterei os tipos de cpf para string em user_schema.py
+- Teste funcionaram com sucesso
+
+
+DIA 26
+
+- Descobri que posso rodar contaniers separados pelo docker-compose, da seguinte maneira (docker-compose up -d nome_contanier(nome que fica dentro do compose.yaml))
+- Alterei em conftest.py o session, onde ele agora recebe como parametro de conexão uma fixture chamada engine onde ela quem cria a conexão com o contanier de teste
+- OBS um escopo na fixture define qual a duração de uma fixture
+- Testes funcionaram corretamente
