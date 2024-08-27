@@ -47,6 +47,7 @@ urllib3 = "==2.1.0"
 uvicorn = "==0.25.0"
 webdriver-manager = "==4.0.1"
 wsproto = "==1.2.0"
+poetry = "*"
 
 [dev-packages]
 

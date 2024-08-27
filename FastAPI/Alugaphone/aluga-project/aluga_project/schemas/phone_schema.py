@@ -9,8 +9,17 @@ class PhoneSchema(BaseModel):
     price: float
 
 
+class PhonePublic(BaseModel):
+    id: int
+    phone_model: str
+    brand: str
+    chip: bool
+    color: str
+    price: float
+
+
 class PhonesList(BaseModel):
-    phones: list[PhoneSchema]
+    phones: list[PhonePublic]
 
 
 class Message(BaseModel):
