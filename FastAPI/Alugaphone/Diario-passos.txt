@@ -232,3 +232,10 @@ DIA 26
 - Alterei em conftest.py o session, onde ele agora recebe como parametro de conexão uma fixture chamada engine onde ela quem cria a conexão com o contanier de teste
 - OBS um escopo na fixture define qual a duração de uma fixture
 - Testes funcionaram corretamente
+
+
+DIA 28
+
+- Conheci sobre o workflow de CI
+- Criamos na raiz do repositorio ESTUDOSPY um caminho para o workflow do github (.github/workflows/pipeline.yaml) com configurações de steps
+- Commitei para o repositorio para o github reconhecer a action
