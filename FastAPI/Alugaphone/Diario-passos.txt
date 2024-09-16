@@ -239,3 +239,12 @@ DIA 28
 - Conheci sobre o workflow de CI
 - Criamos na raiz do repositorio ESTUDOSPY um caminho para o workflow do github (.github/workflows/pipeline.yaml) com configurações de steps
 - Commitei para o repositorio para o github reconhecer a action
+
+
+DIA 29
+
+- Fiz a instalação do Fly.io em meu pc -> (powershell -Command "iwr https://fly.io/install.ps1 -useb | iex")
+- Caso aconteça do anti virus capturar o fly.io, basta liberar a permissão para ele no windows defender
+
+
+OBS: Não fiz o deploy por conta da estrutura da pasta dos projetos python, mas caso quiser ver o proceesso, acesse https://fastapidozero.dunossauro.com/12/
